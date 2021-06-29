@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="jquery/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="options.js"></script>
+    <style>
+      :root {
+        --primary: #e32d91;
+      }
+      ::placeholder {
+        opacity: 0.25;
+      }
+      html{
+        background-color: whitesmoke;
+      }
+      body {
+        font-family: Helvetica, sans-serif;
+        width: 450px;
+        height: 550px;
+        padding: 12px;
+        margin: auto;
+        background-color: white;
+      }
+      input[type="text"],
+      .button,
+      .tab {
+        transition: background-color ease-out 200ms, border-color ease-out 200ms,
+          opacity ease-out 200ms;
+      }
+      input:focus {
+        outline: none;
+        border: solid 1px var(--primary);
+      }
+      h1 {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        padding: none;
+        line-height: 1em;
+      }
+      label {
+        display: inline-block;
+        font-weight: 600;
+      }
+      input,
+      .website {
+        padding: 6px;
+        border: solid 1px lightgrey;
+        border-radius: 6px;
+        outline: none;
+      }
+      input[type="number"] {
+        width: 45px;
+      }
+      input[type="time"] {
+        margin-right: 10px;
+        font-family: Helvetica, sans-serif;
+      }
+      input[type="checkbox"] {
+        margin: 10px 5px;
+      }
+      /*
+      input[type="time"]::-webkit-calendar-picker-indicator {
+        filter: invert(48%) sepia(13%) saturate(6000%) hue-rotate(300deg)
+          brightness(90%) contrast(80%);
+      }
+      */
+      textarea {
+        display: none;
+        width: 400px;
+        height: 250px;
+        resize: none;
+        white-space: nowrap;
+      }
+      hr {
+        margin-top: 0;
+        border: 0;
+        border-top: 1px solid lightgrey;
+      }
+      code {
+        font-size: 1.25em;
+      }
+      .disabled {
+        color: lightgrey;
+      }
+      .settings-row {
+        margin: 12px 0;
+      }
+      .icon {
+        height: 25px;
+        position: relative;
+        top: 4px;
+        margin-right: 6px;
+      }
+      .saved-notification {
+        color: var(--primary);
+        margin-left: 20px;
+        display: none;
+      }
+      #help-page {
+        display: none;
+        margin: -10px;
+        padding: 15px;
+        padding-top: 5px;
+        border-radius: 15px;
+        background-color: whitesmoke;
+      }
+      #back-button {
+        margin-top: 30px;
+        background-color: var(--primary);
+      }
+      #add-bar,
+      .website {
+        display: inline-block;
+        width: 85%;
+        margin: 0 3px 5px 0;
+      }
+
+      .add-row {
+        margin: 10px 0;
+      }
+      .website {
+        border: solid 1px whitesmoke;
+        background-color: whitesmoke;
+        color: #555;
+        text-indent: 5px;
+      }
+      .website:focus {
+        color: black;
+      }
+      .website:hover:not(:focus) {
+        cursor: pointer;
+        background: #eee;
+      }
+      .button {
+        display: inline-block;
+        width: 50px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 0.9em;
+        font-weight: 300;
+        border-radius: 6px;
+        background-color: #d8d8d8;
+        color: white;
+        cursor: pointer;
+        user-select: none;
+      }
+      .tab {
+        display: inline-block;
+        width: 100px;
+        height: 28px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 1em;
+        font-weight: 300;
+        margin-right: -2px;
+        background-color: #d8d8d8;
+        border-radius: 5px 11px 0 0;
+        color: white;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color ease-out 150ms;
+      }
+      .activetab {
+        background-color: var(--primary);
+      }
+      .button:hover:not(:active),
+      .tab:hover:not(.activetab) {
+        background-color: var(--primary);
+        opacity: 0.8;
+      }
+      .button:active {
+        background-color: var(--primary);
+        box-shadow: inset 0 0 0 1px white;
+        opacity: 0.7;
+      }
+      .website-row {
+        display: flex;
+      }
+      .website-row:hover .website:not(:focus) {
+        border: solid 1px lightgrey;
+      }
+      .website-row:hover .button:not(:active):not(:hover) {
+        background-color: var(--primary);
+        opacity: 0.5;
+      }
+      #save-row {
+        display: none;
+      }
+      .modal {
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 2px 2px 6px 0 grey;
+        display: none;
+        position: absolute;
+        width: 350px;
+        height: 200px;
+        line-height: 30px;
+        text-align: center;
+        top: 15%;
+        left: 75px;
+        z-index: 5;
+      }
+      .modal .button {
+        position: absolute;
+        bottom: 15px;
+        left: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      <img class="icon" src="/images/icon128.png" /><span
+        style="color: var(--primary)"
+        >Time Out :</span
+      >
+      Page Blocker
+    </h1>
+    <div id="tab-row">
+      <div class="tab activetab">Blocked Sites</div>
+      <div class="tab">Settings</div>
+    </div>
+    <hr />
+    <div id="settings-page" style="display: none">
+      <div class="modal" id="error-box">
+        <h2>That's not allowed!</h2>
+        <p id="error-message">Error message</p>
+        <p>Please enter a different value</p>
+        <div id="error-button" class="button">Back</div>
+      </div>
+      <div class="settings-row">
+        <label>Active Days:</label>
+        <input class="weekday" type="checkbox" id="mon" name="mon" />Mon
+        <input class="weekday" type="checkbox" id="tue" name="tue" />Tue
+        <input class="weekday" type="checkbox" id="wed" name="wed" />Wed
+        <input class="weekday" type="checkbox" id="thu" name="thu" />Thu
+        <input class="weekday" type="checkbox" id="fri" name="fri" />Fri
+        <input class="weekday" type="checkbox" id="sat" name="sat" />Sat
+        <input class="weekday" type="checkbox" id="sun" name="sun" />Sun
+      </div>
+      <div class="settings-row">
+        <label class="allday-disableable" for="start-time">Start time:</label>
+        <input class="allday-disableable" id="start-time" type="time" />
+        <label class="allday-disableable" for="end-time">End time:</label>
+        <input class="allday-disableable" id="end-time" type="time" />
+        or
+        <input id="allday-checkbox" type="checkbox" />
+        all day
+      </div>
+      <div class="settings-row">
+        <label for="seconds">Number of seconds to wait:</label>
+        <input id="seconds" type="number" min="1" /> seconds
+      </div>
+      <div class="settings-row">
+        <span class="revisits-disableable" id="revisits-span">
+          <input id="revisits-checkbox" type="checkbox" />
+          Do not block re-visits within
+          <input
+            class="revisits-disableable"
+            id="revisits-number"
+            type="number"
+            min="1"
+          />
+          minute(s)
+        </span>
+      </div>
+    </div>
+    <div id="websites-page">
+      <div class="settings-row">
+        <a id="help-link" href="">Help</a>
+        <textarea id="matches"></textarea>
+        <div class="website-row add-row">
+          <input type="text" placeholder="Add address" id="add-bar" />
+          <div class="button" id="add-button">Add</div>
+        </div>
+        <div id="website-table"></div>
+      </div>
+    </div>
+    <div id="help-page">
+      <div id="matching-rules-info">
+        <h2>URL Format</h2>
+        <p>
+          Use the 'add address' bar to enter the names of any website you wish
+          to block.
+        </p>
+        <p>
+          When entering a website name, follow the format
+          <code>www.example.com</code> or <code>www.example.com/path</code>.
+        </p>
+        <p>Do <u>not</u> include any protocol prefix, such as:</p>
+        <ul>
+          <li><code>http://</code></li>
+          <li><code>https://</code></li>
+        </ul>
+        <p>Do <u>not</u> include a single '<code>/</code>' at the end.</p>
+        <p>Valid examples include:</p>
+        <ul>
+          <li><code>www.bbc.co.uk</code></li>
+          <li><code>twitter.com/home</code></li>
+          <li><code>www.youtube.com/watch?v=dQw4w9WgXcQ</code></li>
+        </ul>
+      </div>
+      <div>
+        <hr />
+        <h2>Reset to Default</h2>
+        <p>
+          To clear all stored values and reset all values to default, in the
+          'add address' bar, enter<code> --clear </code>and press 'Add'.
+        </p>
+      </div>
+      <div class="button" id="back-button">Back</div>
+    </div>
+  </body>
+</html>
