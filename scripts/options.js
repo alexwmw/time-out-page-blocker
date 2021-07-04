@@ -1,11 +1,19 @@
 // Functions ------------------------------------------------------------------------
 
+/**
+ * Save the setting in chrome storage
+ * @param {string} key
+ * @param {string} value
+ */
 function saveSetting(key, value) {
   var obj = { saved: "true" };
   obj[key] = value;
   chrome.storage.local.set(obj);
 }
 
+/**
+ * Take the values of the 'website' inputs and store them as a string
+ */
 function saveWebsites() {
   var matchesStr = "";
   if ($(".website").length) {
@@ -16,7 +24,10 @@ function saveWebsites() {
   }
   chrome.storage.local.set({ saved: "true", matches: matchesStr });
 }
-
+/**
+ * Retrieve the settings from chrome storage and set the HTML values accordingly
+ * @param {function} callback
+ */
 function retrieveSettings(callback) {
   chrome.storage.local.get(null, function (result) {
     $('#settings-page input:not([type="checkbox"])').each((index, element) => {
@@ -35,6 +46,9 @@ function retrieveSettings(callback) {
   });
 }
 
+/**
+ * Disable certain input fields depending on other input values
+ */
 function disable() {
   // Disable certain settings according to checkbox value
   $(".revisits-disableable")
@@ -45,6 +59,19 @@ function disable() {
     .prop("disabled", $("#allday-checkbox").prop("checked"));
 }
 
+/**
+ * Delete all stored values from chrome storage and tell background to reset to default settings
+ */
+function clearStorage() {
+  chrome.storage.local.clear(() => {
+    chrome.runtime.sendMessage({ reset: true }, (response) => window.close());
+  });
+}
+
+/**
+ * Show an error message popup
+ * @param {string} message
+ */
 function errorNotification(message) {
   $("#error-message").text(message);
   $("#error-box").show();
@@ -53,7 +80,7 @@ function errorNotification(message) {
 // Document ready ------------------------------------------------------------------------
 
 $(document).ready(function () {
-  //Saving and error checking
+
   $('#settings-page input[type="checkbox"]').on("change", function () {
     saveSetting($(this).prop("id"), $(this).prop("checked"));
   });
@@ -101,22 +128,24 @@ $(document).ready(function () {
 
   $("#add-button").on("click", function () {
     if ($("#add-bar").val() == "--clear") {
-      chrome.storage.local.clear();
-      chrome.storage.sync.clear();
-      window.close();
+      clearStorage();
     } else if ($("#add-bar").val()) {
+      // Create elements
       var websiteRow = document.createElement("div");
       var website = document.createElement("input");
       var removeButton = document.createElement("div");
+      // Set properties
       websiteRow.classList.add("website-row");
       website.classList.add("website");
-      website.type = "text";
       removeButton.classList.add("button", "remove-button");
       removeButton.innerText = "Remove";
+      website.type = "text";
       website.value = $("#add-bar").val();
+      // DOM manipulation
       websiteRow.appendChild(website);
       websiteRow.appendChild(removeButton);
       $(websiteRow).appendTo("#website-table");
+      // Add listeners
       $(removeButton).on("click", function () {
         $(this).closest(".website-row").remove();
         saveWebsites();
@@ -131,6 +160,7 @@ $(document).ready(function () {
           }
         })
         .on("change", saveWebsites);
+      // Reset to blank and save
       $("#add-bar").val("");
       saveWebsites();
     }
@@ -173,5 +203,6 @@ $(document).ready(function () {
       .prop("disabled", $("#allday-checkbox").prop("checked"));
   });
 
+  // Get settings and finish
   retrieveSettings(disable);
 });
