@@ -3,7 +3,7 @@
 <img src="/images/icon_lockup.png" width="500">
 
 ## Link
-<a href="https://chrome.google.com/webstore/detail/time-out-page-blocker/hoeinipdpcnbifnmdkfbgmpaccbjpinl">View in the Chrome Web Store</a>
+<a target="_blank" href="https://chrome.google.com/webstore/detail/time-out-page-blocker/hoeinipdpcnbifnmdkfbgmpaccbjpinl">View in the Chrome Web Store</a>
 
 ## Description
 **Time Out : Page Blocker** is a Chrome extension and productivity tool, designed to help you stay focussed.
