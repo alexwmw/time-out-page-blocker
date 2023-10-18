@@ -1,0 +1,64 @@
+:root[data-theme="theme-light"],
+#OneClickSearch {
+  --bg: #fff;
+  --white: #fff;
+
+  --P1: hsl(300, 50%, 50%);
+  --P2: hsl(300, 40%, 33%);
+  --P3: hsl(300, 40%, 90%);
+  --PA: hsl(300, 40%, 95%);
+
+  /* Accent color */
+  --A1: hsl(169, 55%, 53%);
+  --A2: hsl(300, 66%, 60%);
+  --A3: hsl(300, 75%, 90%);
+
+  /* Dark neutrals */
+  --D1: hsl(212, 20%, 30%);
+  --D2: hsl(212, 20%, 20%);
+  --D3: hsl(212, 20%, 10%);
+
+  /* Light neutrals */
+  --L1: hsl(212, 20%, 75%);
+  --L2: hsl(212, 20%, 85%);
+  --L2-5: hsl(212, 20%, 90%);
+  --L3: hsl(212, 20%, 95%);
+  --L4: hsl(212, 20%, 98%);
+
+  body.modal-open {
+    filter: opacity(0.3) grayscale(1) blur(1px);
+  }
+}
+
+:root[data-theme="theme-dark"] {
+  color-scheme: dark;
+
+  --bg: hsl(212, 20%, 8%);
+  --white: #000;
+
+  --P1: hsl(212, 100%, 60%);
+  --P2: hsl(212, 75%, 40%);
+  --P3: hsl(212, 75%, 20%);
+  --PA: hsl(212, 50%, 15%);
+
+  /* Accent color */
+  --A1: hsl(350, 90%, 60%);
+  --A2: hsl(350, 100%, 70%);
+  --A3: hsl(350, 75%, 20%);
+
+  /* Dark neutrals */
+  --D1: hsl(212, 20%, 75%);
+  --D2: hsl(212, 20%, 85%);
+  --D3: hsl(212, 20%, 95%);
+
+  /* Light neutrals */
+  --L1: hsl(212, 20%, 50%);
+  --L2: hsl(212, 20%, 32%);
+  --L2-5: hsl(212, 20%, 25%);
+  --L3: hsl(213, 20%, 20%);
+  --L4: hsl(212, 20%, 12%);
+
+  body.modal-open {
+    filter: brightness(0.3) grayscale(1) blur(1px);
+  }
+}

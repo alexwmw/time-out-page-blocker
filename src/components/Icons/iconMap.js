@@ -1,0 +1,67 @@
+import {
+  faArrowRotateLeft,
+  faBan,
+  faCheck,
+  faCheckCircle,
+  faCircleInfo,
+  faCog,
+  faEllipsisVertical,
+  faExclamationTriangle,
+  faEye,
+  faFlask,
+  faFloppyDisk,
+  faListDots,
+  faMinus,
+  faMoon,
+  faPalette,
+  faPlug,
+  faPlus,
+  faQuestion,
+  faQuestionCircle,
+  faRecycle,
+  faSearch,
+  faSliders,
+  faSort,
+  faSun,
+  faTimes,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
+
+const iconMap = (type) => {
+  return (
+    {
+      add: { iconClass: faPlus, iconTitle: "Add icon" },
+      advanced: { iconClass: faFlask, iconTitle: "Advanced options icon" },
+      appearance: {
+        iconClass: faPalette,
+        iconTitle: "Appearance options icon",
+      },
+      block: { iconClass: faBan, iconTitle: "Block icon" },
+      check: { iconClass: faCheck, iconTitle: "Tick icon" },
+      checkCircle: { iconClass: faCheckCircle, iconTitle: "Tick icon" },
+      close: { iconClass: faTimes, iconTitle: "Close icon" },
+      collapse: { iconClass: faMinus, iconTitle: "Collapse icon" },
+      darkMode: { iconClass: faMoon, iconTitle: "Dark mode icon" },
+      delete: { iconClass: faTrashAlt, iconTitle: "Close icon" },
+      edit: { iconClass: faEllipsisVertical, iconTitle: "Edit icon" },
+      expand: { iconClass: faEllipsisVertical, iconTitle: "Expand icon" },
+      faq: { iconClass: faQuestion, iconTitle: "Help icon" },
+      function: { iconClass: faPlug, iconTitle: "Function options icon" },
+      help: { iconClass: faQuestionCircle, iconTitle: "Help icon" },
+      information: { iconClass: faCircleInfo, iconTitle: "Info icon" },
+      lightMode: { iconClass: faSun, iconTitle: "Light mode icon" },
+      list: { iconClass: faListDots, iconTitle: "List icon" },
+      more: { iconClass: faEllipsisVertical, iconTitle: "More icon" },
+      options: { iconClass: faCog, iconTitle: "Options icon" },
+      reset: { iconClass: faArrowRotateLeft, iconTitle: "Reset icon" },
+      save: { iconClass: faFloppyDisk, iconTitle: "Save icon" },
+      search: { iconClass: faSearch, iconTitle: "Search icon" },
+      settings: { iconClass: faSliders, iconTitle: "Settings options icon" },
+      sort: { iconClass: faSort, iconTitle: "Sort icon" },
+      stop: { iconClass: faTimes, iconTitle: "Stop icon" },
+      warning: { iconClass: faExclamationTriangle, iconTitle: "Warning icon" },
+    }[type] ?? {}
+  );
+};
+
+export default iconMap;

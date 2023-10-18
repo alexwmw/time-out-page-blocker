@@ -1,0 +1,11 @@
+[
+  {
+    "name": "GoTo",
+    "role": "function",
+    "title": "Follow link",
+    "faviconUrl": "/icons/goto.png",
+    "visibility": "conditional",
+    "position": 0,
+    "regex": "^(?![\\s|\\n])(https?:\\/\\/)?([a-z]{1,100}\\.)?[a-z]{1,100}\\.[a-z]{2,3}(\\.[a-z]{2})?(\\/[^\\s]*)*"
+  }
+]

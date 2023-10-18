@@ -1,0 +1,70 @@
+@import "./_variables.less";
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  width: @app-width;
+  height: @app-height;
+  //overflow: hidden;
+  background-color: var(--bg);
+
+  * {
+    font-family: @font-family;
+  }
+  p,
+  li {
+    font-family: @p-family;
+    font-size: @font-size;
+
+    a {
+      color: var(--P1);
+      &:focus {
+        outline: none;
+      }
+      &:visited {
+        color: var(--P1);
+      }
+    }
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  label,
+  p,
+  li,
+  input,
+  h1,
+  h2,
+  h3 {
+    color: @text-color;
+  }
+
+  input {
+    background-color: var(--white);
+  }
+
+  input,
+  select:focus {
+    outline: none;
+
+    &[type="text"],
+    &[type="number"] {
+      background-color: var(--white);
+    }
+  }
+
+  button {
+    border: none;
+  }
+}

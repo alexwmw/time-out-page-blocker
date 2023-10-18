@@ -1,0 +1,238 @@
+@import "/src/less/_variables.less";
+
+@row-height: 24px;
+@row-height_expanded: 148px;
+@row-padding: 2px;
+@favicon-height: 16px;
+@transition-time: 200ms;
+
+.section-name {
+  transition: filter @transition-time;
+  user-select: none;
+}
+
+li.sortable-item {
+  position: relative;
+  top: 0;
+  overflow: hidden;
+
+  height: @row-height;
+  width: 96%;
+  margin: 6px auto;
+  padding: @row-padding;
+  padding-left: @row-padding * 4;
+
+  border: solid 1px var(--P3);
+  border-radius: 10px;
+  background-color: var(--L4);
+
+  list-style-type: none;
+  list-style-position: inside;
+
+  transition: border @transition-time, height @transition-time,
+    filter @transition-time;
+
+  //Cursor
+  &:not(.undraggable) {
+    cursor: grab;
+  }
+  &.undraggable {
+    cursor: default;
+  }
+
+  &:hover:not(.undraggable),
+  &:hover.expanded {
+    border: solid 1px var(--P1);
+    .sort.icon {
+      color: var(--P1);
+    }
+  }
+
+  &.expanded {
+    height: @row-height_expanded;
+    cursor: default;
+    // border: solid 1px var(--P2);
+
+    .sort.icon {
+      transform: scale(0);
+    }
+    .li-favicon {
+      transform: translate(-20px, 4px) scale(1.2);
+    }
+    .li-provider-name {
+      transform: translate(-10px, 4px) scale(1.2);
+    }
+  }
+
+  #visible & {
+    //background-color: var(--PA);
+  }
+
+  #disabled & {
+    //background-color: var(--L4);
+    img {
+      filter: grayscale(1);
+    }
+  }
+
+  // SortableJS
+
+  &.sortable-drag {
+    opacity: 1 !important;
+  }
+
+  &.sortable-chosen {
+    #visible &,
+    #hidden &,
+    #disabled & {
+      background-color: var(--L2);
+      box-shadow: none;
+      .sort.icon {
+        color: var(--A1);
+      }
+    }
+    box-shadow: 0 0 3px @shadow-color;
+
+    border: solid 1px var(--A1);
+  }
+  &.sortable-ghost {
+    visibility: hidden;
+  }
+
+  // Children
+  > * {
+    &.li-sort-icon {
+      transition: left @transition-time, right @transition-time,
+        transform @transition-time;
+      position: relative;
+      bottom: 6px;
+      left: 4px;
+      user-select: none;
+      font-weight: 600;
+      .sort.icon {
+        color: var(--L2);
+        font-size: 14px;
+        transition: all @transition-time;
+        padding-right: 10px;
+      }
+    }
+
+    &.li-favicon {
+      transition: left @transition-time, right @transition-time,
+        transform @transition-time;
+      height: @favicon-height;
+      margin: 4px 10px;
+      user-select: none;
+    }
+
+    &.li-provider-name {
+      transition: left @transition-time, right @transition-time,
+        transform @transition-time;
+      position: relative;
+      bottom: 5px;
+      left: 8px;
+      user-select: none;
+      font-weight: 600;
+      display: inline-block;
+
+      width: 170px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &.li-expand-btn {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      display: block;
+      padding: 4px;
+      border-radius: 6px;
+
+      text-align: center;
+      cursor: pointer;
+      .icon {
+        display: block;
+        width: 12px;
+        height: 12px;
+      }
+      &:hover {
+        background-color: var(--white);
+        color: var(--P1);
+      }
+    }
+  }
+}
+
+li.sortable-item form {
+  text-align: right;
+  font-size: 7pt;
+  font-weight: 700;
+  margin-top: 8px;
+
+  > div {
+    //width: unset;
+
+    &:last-child {
+      margin-block: 0;
+    }
+  }
+
+  label {
+    flex: 0.3;
+    text-transform: uppercase;
+    padding-right: 5px;
+  }
+  input {
+    flex: 1;
+    border: none;
+    font-size: 8pt;
+    outline: none;
+    height: 18px;
+    max-width: 360px;
+    margin: 3px 10px;
+    justify-self: right;
+  }
+  .btn {
+    cursor: pointer;
+    width: 76px;
+    padding: 4px 3px !important;
+    margin: 3px 10px;
+    border-radius: 6px;
+    border: @invisible-border;
+    gap: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: @text-color;
+    background-color: transparent;
+
+    font-size: 10pt;
+
+    .icon {
+      font-size: 15px;
+    }
+
+    &.submitBtn.hasChanges {
+      //background-color: white;
+      font-weight: 700;
+      // border-color: var(--A2);
+      color: var(--A2);
+      background-color: var(--L4);
+      &:active {
+        color: var(--A1);
+      }
+    }
+    &:hover {
+      background-color: var(--white);
+      color: var(--P1);
+    }
+    &:active {
+      color: var(--P2);
+    }
+    &.hidden {
+      display: none;
+    }
+  }
+}

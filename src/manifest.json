@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "manifest_version": 3,
+  "name": "Time Out : Page Blocker",
+  "description": "Blocks sites until you've held the button",
+  "permissions": ["storage", "contextMenus", "tabs"],
+  "default_locale": "en",
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Time Out : Page Blocker",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "exclude_matches": ["*://meet.google.com/*"],
+      "js": ["content.bundle.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.bundle.js"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["https://*/*", "http://*/*"]
+    }
+  ]
+}

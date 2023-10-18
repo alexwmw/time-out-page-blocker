@@ -1,0 +1,33 @@
+{
+  "search": {
+    "id": "search",
+    "name": "Block list",
+    "nameLong": "Manage block list",
+    "icon": "block",
+    "isOptionsTab": false
+  },
+  "appearance": {
+    "id": "appearance",
+    "name": "Appearance",
+    "icon": "appearance",
+    "isOptionsTab": true
+  },
+  "settings": {
+    "id": "settings",
+    "name": "Settings",
+    "icon": "settings",
+    "isOptionsTab": true
+  },
+  "advanced": {
+    "id": "advanced",
+    "name": "Advanced",
+    "icon": "advanced",
+    "isOptionsTab": false
+  },
+  "info": {
+    "id": "info",
+    "name": "Information",
+    "icon": "information",
+    "isOptionsTab": false
+  }
+}

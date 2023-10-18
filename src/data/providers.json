@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Google",
+    "role": "provider",
+    "hostname": "www.google.com",
+    "queryPath": "search?q=$TEXT$",
+    "faviconUrl": "",
+    "visibility": "visible"
+  },
+  {
+    "name": "Wikipedia",
+    "role": "provider",
+    "hostname": "www.wikipedia.org",
+    "queryPath": "w/index.php?search=$TEXT$",
+    "faviconUrl": "https://en.wikipedia.org/static/favicon/wikipedia.ico",
+    "visibility": "visible"
+  },
+  {
+    "name": "YouTube",
+    "role": "provider",
+    "hostname": "www.youtube.com",
+    "queryPath": "results?search_query=$TEXT$",
+    "faviconUrl": "https://www.youtube.com/s/desktop/cafdf09f/img/favicon_96x96.png",
+    "visibility": "visible"
+  },
+  {
+    "name": "Gmail",
+    "role": "provider",
+    "hostname": "mail.google.com",
+    "queryPath": "mail/u/0/#search/$TEXT$",
+    "faviconUrl": "",
+    "visibility": "disabled"
+  },
+  {
+    "name": "Google Drive",
+    "role": "provider",
+    "hostname": "drive.google.com",
+    "queryPath": "drive/search?q=$TEXT$",
+    "faviconUrl": "",
+    "visibility": "disabled"
+  },
+  {
+    "name": "Amazon",
+    "role": "provider",
+    "hostname": "www.amazon.com",
+    "queryPath": "s?k=$TEXT$",
+    "faviconUrl": "",
+    "visibility": "hidden"
+  },
+  {
+    "name": "DuckDuckGo",
+    "role": "provider",
+    "hostname": "duckduckgo.com",
+    "queryPath": "?q=$TEXT$",
+    "faviconUrl": "",
+    "visibility": "hidden"
+  },
+  {
+    "name": "Reddit",
+    "role": "provider",
+    "hostname": "www.reddit.com",
+    "queryPath": "search?q=$TEXT$",
+    "faviconUrl": "",
+    "visibility": "disabled"
+  },
+  {
+    "name": "Spotify",
+    "role": "provider",
+    "hostname": "open.spotify.com",
+    "queryPath": "search/$TEXT$",
+    "faviconUrl": "",
+    "visibility": "disabled"
+  },
+  {
+    "name": "Twitter",
+    "role": "provider",
+    "hostname": "www.twitter.com",
+    "queryPath": "search?q=$TEXT$",
+    "faviconUrl": "",
+    "visibility": "disabled"
+  },
+  {
+    "name": "Facebook",
+    "role": "provider",
+    "hostname": "www.facebook.com",
+    "queryPath": "search/top?q=$TEXT$",
+    "faviconUrl": "https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRJ1GG_y0J.ico",
+    "visibility": "disabled"
+  },
+  {
+    "name": "Google Translate",
+    "role": "provider",
+    "hostname": "translate.google.com",
+    "queryPath": "?sl=auto&text=$TEXT$",
+    "faviconUrl": "",
+    "visibility": "hidden"
+  }
+]

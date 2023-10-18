@@ -1,0 +1,66 @@
+@import "../../less/_variables.less";
+.modal {
+  .body-area {
+    .form-row {
+      gap: 10px;
+      margin-block: 10px;
+
+      label {
+        flex: 1;
+      }
+      input {
+        flex: 2;
+        border: solid 1px var(--L2);
+        background-color: var(--L4);
+        padding: 4px 6px;
+        border-radius: 4px;
+        &:focus {
+          background-color: var(--white);
+          border: @accent-border;
+        }
+      }
+    }
+    .button {
+      width: 120px;
+    }
+  }
+}
+
+.new-provider-modal {
+  width: 480px;
+  max-width: 76vw;
+  overflow: hidden;
+  transition: 0.3s all;
+
+  .checkbox-row {
+    input {
+      position: relative;
+      top: 2.5px;
+      margin-right: 10px;
+      margin-left: 2px;
+      transform: scale(1.1);
+    }
+  }
+
+  hr {
+    margin-block: 30px;
+  }
+
+  .parse-btn {
+    &.parse-btn {
+      width: initial;
+      font-size: 0.9rem;
+      padding: 4px 8px;
+      border-radius: 5px;
+    }
+  }
+
+  &.hidden {
+    transform: translate(0, 20px);
+    opacity: 0;
+  }
+
+  .new-provider-error-alert {
+    box-shadow: 0 0 0 1000px hsla(212, 20%, 15%, 90%);
+  }
+}

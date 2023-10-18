@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap");
+
+/* Semantic colors */
+@Danger: hsl(350, 75%, 33%);
+@DangerLight: desaturate(lighten(@Danger, 60%), 15%);
+@Warning: hsl(50, 75%, 33%);
+@WarningLight: desaturate(lighten(@Warning, 60%), 15%);
+@Success: hsl(160, 70%, 33%);
+@SuccessLight: desaturate(lighten(@Success, 60%), 15%);
+@Info: hsl(190, 75%, 33%);
+@InfoLight: desaturate(lighten(@Info, 60%), 15%);
+
+/* Text */
+@text-color: var(--D2);
+@text-disabled: var(--L1);
+
+/* Misc */
+@disabled: var(--L3);
+@shadow-color: rgba(35, 53, 72, 0.3);
+
+@control: var(--P2);
+@control-active: var(--A1);
+@control-hover: var(--P1);
+@control-off: var(--L1);
+@control-bg: var(--L3);
+@control-border: solid 1px var(--L2);
+@control-shadow: 0 0 3px @shadow-color;
+@control-transition: 100ms all ease;
+
+/* Borders */
+@invisible-border: solid 1px transparent;
+@accent-border: solid 1px var(--A1);
+
+/* Dimensions */
+@app-height: 600px;
+@app-width: 360px;
+
+/* Fonts */
+@font-size: 0.8rem;
+@font-family: "Tilt Neon";
+@p-family: "Montserrat";
+
+@keyframes modalUpOnEntry {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

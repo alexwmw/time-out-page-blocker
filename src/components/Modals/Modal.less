@@ -1,0 +1,76 @@
+@import "/src/less/_variables.less";
+
+.modal {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px @shadow-color;
+  min-width: 200px;
+  background-color: var(--bg);
+  overflow-x: hidden;
+
+  .title-area {
+    h2 {
+      user-select: none;
+      display: flex;
+
+      > * {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+    }
+  }
+
+  .body-area {
+    padding-inline: 10px;
+    p,
+    li {
+      font-size: 1rem;
+    }
+    ul {
+      padding-inline-start: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+
+    .btn-area {
+      gap: 10px;
+      margin-top: 30px;
+      &.right {
+        padding-left: 10%;
+      }
+      &.left {
+        padding-right: 10%;
+      }
+      button {
+        flex: 0.4;
+        padding: 9px;
+      }
+    }
+  }
+}
+
+.title-bar-modal {
+  border: solid 2px var(--P1);
+  .title-area {
+    justify-content: space-between;
+    h2 {
+      width: 100%;
+      margin: -13px;
+      margin-bottom: 12px;
+      padding: 13px 13px 10px 13px;
+      background-color: var(--P1);
+      color: white;
+
+      display: flex;
+      justify-content: space-between;
+
+      > * {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+    }
+  }
+}

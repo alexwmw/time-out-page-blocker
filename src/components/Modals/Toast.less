@@ -1,0 +1,52 @@
+@import "../../less/_variables.less";
+@trans-duration: 0.33s;
+
+.toast-wrapper {
+  transition: height @trans-duration * 2 ease;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
+  &.exiting {
+    height: 0;
+  }
+
+  .toast {
+    min-width: 100px;
+    padding: 2px 10px;
+    position: relative;
+    border-width: 1px;
+    border-radius: 10px;
+    box-shadow: none;
+    background-color: transparent;
+    border-color: transparent;
+    .title-area {
+      height: 30px;
+      justify-content: center;
+      h2 {
+        text-align: center;
+        font-size: 1rem;
+      }
+      // .modal-title-text {
+      //   filter: brightness(0.5);
+      // }
+    }
+
+    // Transition & State
+    transition: @trans-duration all ease;
+
+    opacity: 0;
+    transform: translateY(20px);
+
+    &.entering,
+    &.entered {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    &.exiting {
+      transform: translateY(-20px);
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.tab {
+  background-color: var(--bg);
+
+  // transition: all 300ms ease;
+
+  color: var(--D1);
+
+  cursor: pointer;
+  user-select: none;
+
+  :root[data-theme="theme-dark"] & {
+    &.selected {
+      color: white;
+    }
+  }
+
+  .svg-inline--fa {
+    margin-right: 10px;
+  }
+
+  &.selected {
+    // flex: 2;
+    font-weight: 700;
+    border-color: var(--P1);
+    background-color: var(--L3);
+    color: var(--P1);
+  }
+  &:hover:not(.selected) {
+    color: var(--D2);
+    background-color: var(--L4);
+  }
+}
