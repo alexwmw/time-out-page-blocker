@@ -12,9 +12,9 @@
     ],
     "pos": 0
   },
-  "fadeOutTime": {
+  "unblockTimeout": {
     "class": "settings",
-    "id": "fadeOutTime",
+    "id": "unblockTimeout",
     "label": "Time-out button hold duration",
     "description": "Number of seconds required when holding the unlock button",
     "value": "5",

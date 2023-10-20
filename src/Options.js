@@ -9,7 +9,6 @@ import Card from "./components/Cards/Card";
 import ChromeContext from "./contexts/ChromeContext";
 import { ToastsContext, ToastsReducer } from "./reducers/ToastsReducer";
 import ChromeDispatcher from "./modules/ChromeDispatcher";
-import { clear } from "./modules/Utilities";
 import "./App.less";
 import "./Options.less";
 import "./less/flex.less";
@@ -18,21 +17,13 @@ import useApplyTheme from "./hooks/useApplyTheme";
 import useGetOptions from "./hooks/useGetOptions";
 import Spinner from "./components/Spinner/Spinner";
 
-const devOptions = {
-  resetOptions: true,
-};
-
 /** Define root */
 const rootElement = document.getElementById("options");
 const root = createRoot(rootElement);
 
-if (devOptions.resetOptions) {
-  clear();
-}
-
 const Options = () => {
   const [toasts, dispatchToasts] = useReducer(ToastsReducer, []);
-  const [options, setOptions] = useGetOptions(devOptions, () =>
+  const [options] = useGetOptions(() =>
     dispatchToasts({ type: "SETTING_UPDATED" }),
   );
 

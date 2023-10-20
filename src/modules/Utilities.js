@@ -145,18 +145,7 @@ export const set = (obj, callback) => {
 
 export const get = (keys, callback) => chrome.storage.sync.get(keys, callback);
 
-/** Style for the popup based on transition state:
- *  [entering, entered, exiting, exited] */
-export const styleByState = (state, fade, fadeOutTime) => {
-  const opacityValue = state === "exiting" ? 0 : 1;
-  const transitionTime = fadeOutTime * 1000;
-  const transitionArgs =
-    state === "exiting" && fade ? `opacity ${transitionTime}ms ease-out` : "";
-  return {
-    opacity: opacityValue,
-    transition: transitionArgs,
-  };
-};
+export const getAsync = async (keys) => chrome.storage.sync.get(keys);
 
 export const applyTheme = (theme, element = null) => {
   if (element) {
