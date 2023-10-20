@@ -5,7 +5,7 @@
   border-radius: 9px;
   font-size: 1rem;
   color: white;
-  background-color: @control;
+  background: @gradient;
   transition: @control-transition;
   align-items: center;
   display: flex;
@@ -21,18 +21,19 @@
   }
 
   &:hover {
-    background-color: @control-hover;
+    filter: saturate(150%) brightness(120%) grayscale(23%);
   }
+
   &:active {
-    background-color: @control-active;
+    background: @control-active;
+    filter: none;
     transition: unset;
-    // outline: @accent-border;
   }
 
   &.unchanged,
   &.disabled {
     pointer-events: none;
-    background-color: var(--L2);
+    background: var(--L2);
     color: var(--L1);
   }
 }

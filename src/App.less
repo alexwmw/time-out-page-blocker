@@ -1,15 +1,19 @@
 @import "/src/less/body.less";
 @import "/src/less/_variables.less";
+
 html {
   font-size: 16.5px;
+
   p {
     line-height: 1.4;
   }
 }
+
 html,
 body {
   overflow: hidden;
 }
+
 .app {
   &:not(.ready) {
     //display: none !important;
@@ -29,6 +33,7 @@ body {
     h1 {
       font-size: 1.1rem;
     }
+
     :root[data-theme="theme-dark"] & {
       background-color: black;
       box-shadow: none;
@@ -45,8 +50,29 @@ body {
 
     &.options {
       color: var(--D1);
+
       &:hover {
         color: var(--P2);
+      }
+    }
+  }
+
+  .button-container {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 0;
+
+    h1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+
+      svg {
+        height: 40px;
+        color: var(--P1)
       }
     }
   }
@@ -55,12 +81,7 @@ body {
     padding: 24px;
     height: 530px;
     overflow-y: overlay;
-    position: fixed;
-    top: 48px;
-    right: 0;
-    left: 0;
     z-index: 0;
-    height: 84%;
   }
 
   .help-modal {
@@ -90,28 +111,16 @@ body {
     :root[data-theme="theme-dark"] & {
       box-shadow: 0 -10px 76px 20px rgb(255 255 255 / 6%);
     }
+
     p,
     li {
       font-size: 0.9rem;
     }
+
     &.error-alert {
       button {
         flex: 0.4;
       }
     }
   }
-
-  // .expanded-open & {
-  //   h3,
-  //   .sortable-item:not(.expanded) {
-  //     filter: opacity(0.75);
-  //     cursor: default;
-  //     .expand-btn {
-  //       cursor: pointer;
-  //     }
-  //     &:hover {
-  //       border-color: transparent;
-  //     }
-  //   }
-  // }
 }

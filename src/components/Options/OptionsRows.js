@@ -5,9 +5,11 @@ import Slider from "../Inputs/Slider";
 import Switch from "../Inputs/Switch";
 import ColorPicker from "../Inputs/ColorPicker";
 import ThemeButton from "../Buttons/ThemeButton";
-
 import "./OptionsRows.less";
 import ChromeContext from "../../contexts/ChromeContext";
+import SwitchList from "../Inputs/SwitchList";
+import TimeLimit from "../Inputs/TimeLimit";
+
 const OptionRows = ({ selectedTab }) => {
   const { options } = useContext(ChromeContext);
 
@@ -23,6 +25,20 @@ const OptionRows = ({ selectedTab }) => {
         return (
           <div className="control switch-control">
             <Switch settingId={id} />
+          </div>
+        );
+      case "switchList":
+        return (
+          <div className="control switch-control">
+            <SwitchList settingId={id} />
+          </div>
+        );
+      case "timeLimit":
+        return (
+          <div className="control ">
+            <div className=" time-control">
+              <TimeLimit settingId={id} />
+            </div>
           </div>
         );
       case "color-picker":
@@ -64,17 +80,19 @@ const OptionRows = ({ selectedTab }) => {
   return (
     <div className={`options-rows ${selectedTab.id}`}>
       {optionsToDisplay.map((setting) => {
-        const { id, type, description, label, value, unit } = setting;
+        const { id, type, description, label, parentId } = setting;
         const ControlElement = getControlOfType(type, id);
 
         return (
-          <div key={id} className={`options-row-container ${type}-row`}>
-            <h3>{label}</h3>
-            <div className={"options-row"}>
-              <p className="row-label">{description}</p>
-              {ControlElement}
+          (options[parentId]?.value ?? true) && (
+            <div key={id} className={`options-row-container ${type}-row`}>
+              <h3>{label}</h3>
+              <div className={"options-row"}>
+                <p className="row-label">{description}</p>
+                {ControlElement}
+              </div>
             </div>
-          </div>
+          )
         );
       })}
     </div>

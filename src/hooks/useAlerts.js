@@ -26,18 +26,6 @@ const useAlerts = () => {
         callback: onClick,
       });
     },
-    onlyVisibleError: () => {
-      setAlertData({
-        isOpen: true,
-        title: "Unable to delete",
-        children: (
-          <>
-            <p>Cannot delete the only visible provider.</p>
-            <p>Add another provider to the visible section first.</p>
-          </>
-        ),
-      });
-    },
     confirm: ({ title, question, onProceed }) => {
       setConfirmData({
         isOpen: true,

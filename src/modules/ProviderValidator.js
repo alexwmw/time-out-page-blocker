@@ -12,20 +12,11 @@ const ProviderValidator = (provider, providers = null) => {
   const validName =
     !nameExists && RegExp(schema.properties.name.pattern).test(provider.name);
 
-  const validRole = schema.properties.role.enum.some(
-    (value) => value == provider.role
-  );
-
   const validHostname =
     isValidHostname(provider.hostname) && provider.hostname.indexOf(".") > -1;
 
-  const validQueryPath = provider.queryPath.indexOf("$TEXT$") > -1;
-
-  const validFaviconUrl =
-    provider.faviconUrl === "" || isValidURL(provider.faviconUrl);
-
   const validVisibility = schema.properties.visibility.enum.some(
-    (value) => value == provider.visibility
+    (value) => value == provider.visibility,
   );
 
   /** report: object values set to 'true' or error message for each property */
@@ -39,20 +30,11 @@ const ProviderValidator = (provider, providers = null) => {
           nameExists && ` Name already exists. Please use a unique name.`
         }`);
 
-  report.role = validRole || `\"${provider.role}\" is not a valid role.`;
-
   report.hostname =
     validHostname ||
     (provider.hostname === ""
       ? "Hostname cannot be blank."
       : `\"${provider.hostname}\" is not a valid hostname.`);
-
-  report.queryPath =
-    validQueryPath ||
-    `\"${provider.queryPath}\" is not a valid query path. The query path must contain the placeholder $TEXT$.`;
-
-  report.faviconUrl =
-    validFaviconUrl || `\"${provider.faviconUrl}\" is not a valid favicon URL.`;
 
   report.visibility =
     validVisibility || `\"${provider.visibility}\" is not a valid visibility.`;

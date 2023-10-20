@@ -8,22 +8,24 @@ body {
   margin: 0;
   width: @app-width;
   height: @app-height;
-  //overflow: hidden;
   background-color: var(--bg);
 
   * {
     font-family: @font-family;
   }
+
   p,
-  li {
+  li, input {
     font-family: @p-family;
     font-size: @font-size;
 
     a {
       color: var(--P1);
+
       &:focus {
         outline: none;
       }
+
       &:visited {
         color: var(--P1);
       }

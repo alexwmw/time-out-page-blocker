@@ -17,15 +17,12 @@ function AddProviderModal({ isOpen, setIsOpen }) {
   const defaults = useMemo(() => ({
     name: "",
     hostname: "",
-    queryPath: "",
-    faviconUrl: "",
-    role: "provider",
     visibility: "hidden",
   }));
 
   const [formValues, dispatchFormValues] = useReducer(
     ProviderFormReducer,
-    defaults
+    defaults,
   );
 
   const dispatchChrome = ChromeDispatcher;
@@ -60,7 +57,7 @@ function AddProviderModal({ isOpen, setIsOpen }) {
   return (
     <Modal
       classes={["new-provider-modal", !isVisible && "hidden"]}
-      title={"Add new provider"}
+      title={"Add to block list"}
       hasTitleBar={true}
       onClose={onClose}
       onProceed={onSubmit}

@@ -1,4 +1,5 @@
 @import "../../less/_variables.less";
+
 @trans-duration: 0.33s;
 
 .toast-wrapper {
@@ -22,13 +23,16 @@
     box-shadow: none;
     background-color: transparent;
     border-color: transparent;
+
     .title-area {
       height: 30px;
       justify-content: center;
+
       h2 {
         text-align: center;
         font-size: 1rem;
       }
+
       // .modal-title-text {
       //   filter: brightness(0.5);
       // }
@@ -45,6 +49,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+
     &.exiting {
       transform: translateY(-20px);
     }

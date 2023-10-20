@@ -1,16 +1,16 @@
 import { sortablesFromProviders } from "../modules/Utilities";
+import providers from "/src/data/providers.json";
 
 const SortablesReducer = (state, action) => {
   switch (action.type) {
     case "SET_ALL_LISTS":
-      return sortablesFromProviders(action.providers);
+      return sortablesFromProviders(action.providers ?? providers);
     case "SET_VISIBLE":
       return {
         ...state,
         visible: action.list.map((p) => ({
           ...p,
           visibility: "visible",
-          onlyVisible: action.list.length == 1,
         })),
       };
     case "SET_HIDDEN":
@@ -19,7 +19,6 @@ const SortablesReducer = (state, action) => {
         hidden: action.list.map((p) => ({
           ...p,
           visibility: "hidden",
-          onlyVisible: false,
         })),
       };
     case "SET_DISABLED":
@@ -28,7 +27,6 @@ const SortablesReducer = (state, action) => {
         disabled: action.list.map((p) => ({
           ...p,
           visibility: "disabled",
-          onlyVisible: false,
         })),
       };
   }

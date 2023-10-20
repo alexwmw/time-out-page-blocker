@@ -12,6 +12,7 @@
   z-index: 0;
 
   /* Hide default HTML checkbox */
+
   input {
     opacity: 0;
     width: 0;
@@ -20,16 +21,19 @@
     &:checked + .handle {
       background-color: @control-bg;
     }
+
     &:checked + .handle:before {
       background-color: @control;
       transform: translateX(17px);
     }
+
     &:hover + .handle:before {
       background-color: @control-hover;
     }
   }
 
   /* The slider */
+
   .handle {
     position: absolute;
     cursor: pointer;
@@ -57,5 +61,97 @@
     left: 4px;
     bottom: 4px;
     transition: @transition_time;
+  }
+}
+
+.time-control {
+  .row {
+    &:nth-child(1) {
+      label {
+        font-weight: 700;
+      }
+
+      border-block: 1px dotted var(--D1);
+
+    }
+
+  }
+}
+
+
+.switch-list, .time-control {
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 5px;
+
+  form.row {
+    grid-template-columns: 1fr 1fr 40px;
+
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding-block: 5px;
+    padding: 5px;
+
+
+    &:has(:checked) {
+      > label:first-of-type {
+        //
+      }
+    }
+
+    &.disabled {
+      input {
+        pointer-events: none;
+        cursor: default;
+
+        &:hover + .handle:before {
+          background-color: @control;
+        }
+      }
+
+      .handle {
+        cursor: default;
+      }
+
+
+      label, p {
+        color: var(--L1);
+        line-height: 1;
+      }
+
+      filter: grayscale(100%);
+
+      opacity: 0.5;
+
+
+    }
+  }
+
+  .time {
+    border: solid 1px var(--L1);
+    border-radius: 4px;
+    padding: 3px;
+    outline: none;
+    cursor: pointer;
+
+
+    &:invalid {
+      background-color: @DangerLight;
+    }
+
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(0.5) sepia(1) saturate(3) brightness(50%) hue-rotate(275deg);
+      cursor: pointer;
+    }
+
+    &:focus {
+      border-color: var(--P1);
+      outline: solid 1px var(--P1);
+    }
   }
 }

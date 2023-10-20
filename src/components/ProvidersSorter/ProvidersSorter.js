@@ -25,7 +25,7 @@ const ProvidersSorter = (props) => {
   const [sortables, dispatchSortables] = useReducer(
     SortablesReducer,
     providers,
-    sortablesFromProviders
+    sortablesFromProviders,
   );
 
   /** Get providers on first render */
@@ -33,7 +33,7 @@ const ProvidersSorter = (props) => {
     (result) => {
       setProviders(result.providers);
     },
-    ["providers"]
+    ["providers"],
   );
 
   /** Update providers when changes occur elsewhere in the extension */
@@ -41,23 +41,12 @@ const ProvidersSorter = (props) => {
     ({ oldValue, newValue }) => {
       setProviders(newValue);
     },
-    ["providers"]
+    ["providers"],
   );
 
   useEffect(() => {
     dispatchSortables({ type: "SET_ALL_LISTS", providers: providers });
   }, [providers]);
-
-  useEffect(() => {
-    const array = arrayFromSortables(sortables);
-    const finished = sortIsFinished(array);
-    if (finished) {
-      const rearranged = placesHaveChanged(array, providers);
-      if (rearranged) {
-        dispatchChrome({ type: "SET_PROVIDERS", providers: array });
-      }
-    }
-  }, [sortables]);
 
   return (
     <>
@@ -76,32 +65,15 @@ const ProvidersSorter = (props) => {
                   openItem={openItem}
                   setOpenItem={setOpenItem}
                   id={"visible"}
-                  name={"Visible"}
-                  maxLength={4}
+                  name={"Blocked domains"}
                   list={sortables.visible}
-                  setList={(list) =>
-                    dispatchSortables({ type: "SET_VISIBLE", list: list })
-                  }
                 />
                 <SortableSection
                   openItem={openItem}
                   setOpenItem={setOpenItem}
                   id={"hidden"}
-                  name={"Hidden"}
+                  name={"Blocked pages"}
                   list={sortables.hidden}
-                  setList={(list) =>
-                    dispatchSortables({ type: "SET_HIDDEN", list: list })
-                  }
-                />
-                <SortableSection
-                  openItem={openItem}
-                  setOpenItem={setOpenItem}
-                  id={"disabled"}
-                  name={"Disabled"}
-                  list={sortables.disabled}
-                  setList={(list) =>
-                    dispatchSortables({ type: "SET_DISABLED", list: list })
-                  }
                 />
               </ChromeContext.Provider>
             </AlertsContext.Provider>

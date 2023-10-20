@@ -1,135 +1,121 @@
 {
-  "color": {
-    "class": "appearance",
-    "id": "color",
-    "label": "Popup color",
-    "description": "Color of the popup",
-    "value": "f0f2f5",
-    "type": "color-picker",
-    "options": ["f0f2f5", "ebf2fa", "415162", "29323d"],
-    "pos": 0
-  },
   "theme": {
-    "class": "appearance",
+    "class": "settings",
     "id": "theme",
     "label": "Menu theme",
     "description": "Choose light or dark theme for the extension menus",
     "value": "Light",
     "type": "theme",
-    "options": ["Light", "Dark"],
-    "pos": 1
-  },
-  "scale": {
-    "class": "appearance",
-    "id": "scale",
-    "label": "Popup size",
-    "description": "Size of the popup",
-    "value": "1",
-    "type": "slider",
-    "unit": null,
-    "min": 0.9,
-    "max": 1.1,
-    "step": 0.1,
-    "dictionary": { "0.9": "Sml", "1": "Med", "1.1": "Lrg" },
-    "pos": 2
-  },
-  "borderRadius": {
-    "class": "appearance",
-    "id": "borderRadius",
-    "label": "Popup curvature",
-    "description": "Curvature of the popup's corners",
-    "value": "1",
-    "type": "slider",
-    "unit": null,
-    "min": 0.7,
-    "max": 1.3,
-    "step": 0.1,
-    "pos": 3
-  },
-  "shadow": {
-    "class": "appearance",
-    "id": "shadow",
-    "label": "Popup shadow",
-    "description": "Add a subtle shadow behind the popup",
-    "value": true,
-    "type": "switch",
-    "pos": 4
-  },
-  "animations": {
-    "class": "appearance",
-    "id": "animations",
-    "label": "Enable animations",
-    "description": "Enable animations in the popup",
-    "value": true,
-    "type": "switch",
-    "pos": 5
-  },
-  "allowTitles": {
-    "class": "appearance",
-    "id": "allowTitles",
-    "label": "Show names",
-    "description": "Show the search provider's name when hovering on the icons",
-    "value": true,
-    "type": "switch",
-    "pos": 6
+    "options": [
+      "Light",
+      "Dark"
+    ],
+    "pos": 0
   },
   "fadeOutTime": {
     "class": "settings",
     "id": "fadeOutTime",
-    "label": "Fade-out duration",
-    "description": "Number of seconds to fade-out the pop-up",
+    "label": "Time-out button hold duration",
+    "description": "Number of seconds required when holding the unlock button",
     "value": "5",
-    "type": "slider",
-    "unit": "s",
+    "type": "number",
+    "unit": "sec",
     "min": 3,
-    "max": 10,
-    "step": 0.5,
-    "pos": 0
-  },
-  "fadeDelay": {
-    "class": "settings",
-    "id": "fadeDelay",
-    "label": "Fade-out delay",
-    "description": "Number of seconds of inactivity before fade-out begins",
-    "value": "5",
-    "type": "slider",
-    "unit": "s",
-    "min": 3,
-    "max": 10,
-    "step": 0.5,
+    "max": 99,
+    "step": 1,
     "pos": 1
   },
-  "showDelay": {
-    "class": "settings",
-    "id": "showDelay",
-    "label": "Hover delay",
-    "description": "Number of seconds to hover before showing hidden icons",
-    "value": "1",
-    "type": "slider",
-    "unit": "s",
-    "min": 0,
-    "max": 5,
-    "step": 0.5,
-    "pos": 2
-  },
-  "linkTarget": {
-    "class": "settings",
-    "id": "linkTarget",
-    "label": "Open search in...",
-    "description": "Open search in a new tab or the current tab",
-    "value": "New tab",
-    "type": "select",
-    "options": ["New tab", "Current tab"],
-    "dictionary": { "New tab": "_blank", "Current tab": "_self" },
-    "pos": 3
-  },
-  "maxChars": {
-    "class": "advanced",
-    "id": "maxChars",
-    "label": "Max. characters",
-    "description": "Maximum number of characters that will trigger the popup when selected. Set to 0 for unlimited.",
-    "value": 1000,
-    "type": "number",
+  "scheduleBlocking": {
+    "class": "scheduling",
+    "id": "scheduleBlocking",
+    "label": "Allow scheduling",
+    "description": "Only block sites during certain days and hours",
+    "type": "switch",
+    "value": true,
     "pos": 0
+  },
+  "activeDays": {
+    "class": "scheduling",
+    "id": "activeDays",
+    "label": "Active days",
+    "description": "Days on which blocking will be active",
+    "type": "switchList",
+    "parentId": "scheduleBlocking",
+    "value": [
+      {
+        "label": "Monday",
+        "value": false
+      },
+      {
+        "label": "Tuesday",
+        "value": false
+      },
+      {
+        "label": "Wednesday",
+        "value": false
+      },
+      {
+        "label": "Thursday",
+        "value": false
+      },
+      {
+        "label": "Friday",
+        "value": false
+      },
+      {
+        "label": "Saturday",
+        "value": false
+      },
+      {
+        "label": "Sunday",
+        "value": false
+      }
+    ],
+    "pos": 1
+  },
+  "activeTimes": {
+    "class": "scheduling",
+    "id": "activeTimes",
+    "label": "Active times",
+    "description": "Times during which blocking will be active",
+    "type": "timeLimit",
+    "parentId": "scheduleBlocking",
+    "pos": 2,
+    "value": {
+      "allDay": {
+        "label": "All day",
+        "value": false
+      },
+      "start": {
+        "label": "Start time",
+        "value": "09:00"
+      },
+      "end": {
+        "label": "End time",
+        "value": "17:00"
+      }
+    }
+  },
+  "allowRevisits": {
+    "class": "settings",
+    "id": "allowRevisits",
+    "label": "Allow re-visits after unblocking",
+    "description": "Allow multiple visits to sites that have been unblocked using the button within a certain time frame",
+    "type": "switch",
+    "pos": 4,
+    "value": true
+  },
+  "revisitLimit": {
+    "class": "settings",
+    "id": "revisitLimit",
+    "label": "Re-visit time limit",
+    "description": "Time frame during which visits to blocked sites will be allowed after unblocking",
+    "value": 1,
+    "min": 1,
+    "max": 999,
+    "type": "number",
+    "unit": "min",
+    "pos": 5,
+    "parentId": "allowRevisits"
   }
 }

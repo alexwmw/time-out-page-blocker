@@ -1,35 +1,44 @@
 import clsx from "clsx";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import ChromeContext from "../../contexts/ChromeContext";
 import Button from "../Buttons/Button";
 import "./Number.less";
 
 const Number = ({ settingId }) => {
   const { options, dispatchChrome } = useContext(ChromeContext);
+  const { min, max, parentId, unit } = options[settingId];
   const [value, setValue] = useState(options[settingId].value);
 
+  const ref = useRef();
   const changeHandler = (e) => {
     setValue(e.target.value);
   };
 
   const onSet = () => {
-    dispatchChrome({
-      type: "UPDATE_SETTING",
-      settingId: settingId,
-      value: value,
-    });
+    if (ref.current.reportValidity())
+      dispatchChrome({
+        type: "UPDATE_SETTING",
+        settingId: settingId,
+        value: value,
+      });
   };
 
   return (
     <>
-      <input
-        type={"number"}
-        className={"number"}
-        value={value}
-        onChange={changeHandler}
-      ></input>
+      <>
+        <input
+          ref={ref}
+          type={"number"}
+          className={"number"}
+          value={value}
+          onChange={changeHandler}
+          min={min}
+          max={max}
+        ></input>
+        {unit ?? ""}
+      </>
       <Button
-        classes={value == options[settingId].value && "unchanged"}
+        classes={value == options[settingId].value && "disabled"}
         onClick={onSet}
       >
         Set

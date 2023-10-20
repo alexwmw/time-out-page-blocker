@@ -10,8 +10,7 @@ function SortableItem({ provider, openItem, setOpenItem }) {
   /** State and local data */
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const faviconUrl =
-    provider.faviconUrl || `http://${provider.hostname}/favicon.ico`;
+  const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain_url=${provider.hostname}`;
 
   const toggleExpanded = () => {
     setIsExpanded((expanded) => !expanded);
@@ -38,28 +37,23 @@ function SortableItem({ provider, openItem, setOpenItem }) {
 
   return (
     <li
-      title={
-        provider.onlyVisible && !isExpanded
-          ? "Cannot move only visible item"
-          : ""
-      }
       data-id={provider.name}
-      className={clsx(
-        "sortable-item",
-        isExpanded && ["expanded", "undraggable"],
-        provider.onlyVisible && "undraggable"
-      )}
+      className={clsx("sortable-item", isExpanded && ["expanded"])}
       onClick={(e) => setOpenItem(provider.name)}
       onDragStart={(e) => setOpenItem(null)}
     >
-      <Icon className={"li-sort-icon"} type={"sort"} />
-      <Img className="li-favicon" src={faviconUrl}></Img>
-      <span className="li-provider-name">{provider.name}</span>
-      <IconTrigger
-        className={clsx("li-expand-btn", "undraggable")}
-        onClick={toggleExpanded}
-        type={!isExpanded ? "expand" : "collapse"}
-      />
+      <div className={"li-header"}>
+        <Img className="li-favicon" src={faviconUrl}></Img>
+        <div className="li-provider-name">
+          <p>{provider.name}</p>
+          <p>{provider.type ?? "Domain"}</p>
+        </div>
+        <IconTrigger
+          className={clsx("li-expand-btn")}
+          onClick={toggleExpanded}
+          type={!isExpanded ? "edit" : "collapse"}
+        />
+      </div>
       {isExpanded && (
         <ProviderForm
           provider={provider}

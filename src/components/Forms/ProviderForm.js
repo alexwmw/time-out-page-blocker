@@ -13,7 +13,7 @@ function ProviderForm({ provider, closeForm }) {
   const [hasChanges, setHasChanges] = useState(false);
   const [formValues, dispatchFormValues] = useReducer(
     ProviderFormReducer,
-    provider
+    provider,
   );
 
   /** Event handlers */
@@ -38,21 +38,16 @@ function ProviderForm({ provider, closeForm }) {
   const deleteHandler = (e) => {
     e.preventDefault();
 
-    if (provider.onlyVisible) {
-      alertHandler.onlyVisibleError();
-    } else {
-      alertHandler.confirm({
-        title: "Confirm delete",
-        question: `Are you sure you want to delete \"${provider.name}\"?`,
-        onProceed: () =>
-          dispatchChrome({
-            type: "DELETE_PROVIDER",
-            provider: provider,
-          }),
-      });
-    }
+    alertHandler.confirm({
+      title: "Confirm delete",
+      question: `Are you sure you want to delete \"${provider.name}\"?`,
+      onProceed: () =>
+        dispatchChrome({
+          type: "DELETE_PROVIDER",
+          provider: provider,
+        }),
+    });
   };
-
 
   useEffect(() => {
     const areDifferent = compareObjs(provider, formValues, {

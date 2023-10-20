@@ -21,7 +21,7 @@ const OptionsTitleArea = ({ selectedTab, isSearch }) => {
           "flex-container",
           "row",
           "center",
-          "options-title-area"
+          "options-title-area",
         )}
       >
         <h2>{selectedTab.nameLong ?? selectedTab.name} </h2>
@@ -29,7 +29,7 @@ const OptionsTitleArea = ({ selectedTab, isSearch }) => {
           <>
             <HelpIcon />
             <Button icon={"add"} onClick={onAddProvClick}>
-              Add new provider
+              Add to block list
             </Button>
           </>
         )}

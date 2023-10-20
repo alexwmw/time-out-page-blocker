@@ -1,4 +1,5 @@
 import OCSfunctions from "/src/data/functions.json";
+import defaultOptions from "/src/data/options.json";
 import {
   replaceObjectInArray,
   set,
@@ -10,8 +11,7 @@ import {
 // Localize strings
 const OCSproviders = localizedProviders();
 
-const ChromeDispatcher = (action) => {
-
+const ChromeDispatcher = (action, callback = () => {}) => {
   switch (action.type) {
     case "SET_PROVIDERS":
       set({
@@ -25,23 +25,23 @@ const ChromeDispatcher = (action) => {
       get(["providers"], (result) =>
         set({
           providers: replaceObjectInArray(result.providers, action.provider),
-        })
+        }),
       );
       break;
     case "ADD_NEW_PROVIDER":
       get(["providers"], (result) =>
         set({
           providers: [...result.providers, action.provider],
-        })
+        }),
       );
       break;
     case "DELETE_PROVIDER":
       get(["providers"], (result) =>
         set({
           providers: result.providers.filter(
-            (p) => p.name !== action.provider.name
+            (p) => p.name !== action.provider.name,
           ),
-        })
+        }),
       );
       break;
     case "UPDATE_SETTING":
@@ -51,7 +51,13 @@ const ChromeDispatcher = (action) => {
         set({ options: result.options });
       });
       break;
+    case "CLEAR_SETTINGS":
+      get(["options"], () => {
+        set({ options: defaultOptions });
+      });
+      break;
   }
+  callback();
 };
 
 export default ChromeDispatcher;

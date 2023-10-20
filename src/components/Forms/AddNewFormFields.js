@@ -10,13 +10,11 @@ function AddNewFormFields({ dispatch, name, tooltips }) {
   const [alertIsOpen, setAlertIsOpen] = useState(false);
   const [alertStr, setAlertStr] = useState("");
 
-  const onParseSuccess = (name, hostname, queryPath) => {
+  const onParseSuccess = (name, hostname) => {
     dispatch({
       type: "SET_ALL",
       name: name,
       hostname: hostname,
-      queryPath: queryPath,
-      faviconUrl: "",
     });
     dispatch({
       type: "FORMAT_ALL",
@@ -34,7 +32,7 @@ function AddNewFormFields({ dispatch, name, tooltips }) {
       searchString,
       removeParameters,
       onParseSuccess,
-      onParseError
+      onParseError,
     );
 
   const checkHandler = (e) => {
@@ -64,7 +62,6 @@ function AddNewFormFields({ dispatch, name, tooltips }) {
       <h3>Auto-fill</h3>
       <FormField
         label={"Search URL"}
-        classes={["undraggable"]}
         value={searchString}
         required={false}
         setValue={setSearchString}
@@ -89,7 +86,6 @@ function AddNewFormFields({ dispatch, name, tooltips }) {
       <h3>New provider details</h3>
       <FormField
         label={"Name"}
-        classes={["undraggable"]}
         value={name}
         required={true}
         setValue={(value) => dispatch({ type: "SET_NAME", value: value })}

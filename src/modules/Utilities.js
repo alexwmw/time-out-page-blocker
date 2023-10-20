@@ -22,7 +22,7 @@ export const localizedOptions = () => {
   try {
     opts.color.label = `Popup ${chrome.i18n.getMessage("color")}`;
     opts.color.description = `${chrome.i18n.getMessage(
-      "ColorCaps"
+      "ColorCaps",
     )} of the popup`;
   } catch (e) {
     console.log("i18n not supported in this version of chrome", e);
@@ -54,7 +54,7 @@ export const getFromArray = (array, key, matchKey = "name") => {
 /** Helper function */
 export const replaceObjectInArray = (array, newObject, matchKey = "name") => {
   const itemIndex = array.findIndex(
-    (object) => object[matchKey] === newObject[matchKey]
+    (object) => object[matchKey] === newObject[matchKey],
   );
   if (itemIndex > -1) {
     array[itemIndex] = newObject;
@@ -87,7 +87,7 @@ export const disabled = (obj) => obj.visibility === "disabled";
 export const compareObjs = (
   A,
   B,
-  options = { type: "same", keysOnly: false }
+  options = { type: "same", keysOnly: false },
 ) => {
   let aKeys = Object.keys(A);
   let bKeys = Object.keys(B);
@@ -110,18 +110,12 @@ export const compareObjs = (
 };
 
 export const sortablesFromProviders = (providers) => {
-  providers = providers.map((p) => ({ ...p, onlyVisible: false }));
-
   const sortables = {
     visible: providers.filter((p) => visible(p)),
     hidden: providers.filter((p) => hidden(p)),
     disabled: providers.filter((p) => disabled(p)),
     none: providers.filter((p) => !visible(p) && !hidden(p) && !disabled(p)),
   };
-
-  if (sortables.visible.length == 1) {
-    sortables.visible[0].onlyVisible = true;
-  }
 
   return sortables;
 };
@@ -141,11 +135,13 @@ export const placesHaveChanged = (array, providers) =>
   array.some(
     (e, i, a) =>
       a[i].name !== providers[i].name ||
-      a[i].visibility !== providers[i].visibility
+      a[i].visibility !== providers[i].visibility,
   );
 
-export const set = (obj, callback) =>
+export const set = (obj, callback) => {
+  console.log({ set: obj });
   chrome.storage.sync.set(obj, callback && callback());
+};
 
 export const get = (keys, callback) => chrome.storage.sync.get(keys, callback);
 
@@ -169,4 +165,8 @@ export const applyTheme = (theme, element = null) => {
     const html = document.querySelector("html");
     html.dataset.theme = `theme-${theme}`;
   }
+};
+
+export const clear = () => {
+  chrome.storage.sync.clear();
 };

@@ -9,6 +9,8 @@ import { get } from "./modules/Utilities";
 import "./App.less";
 import "./less/flex.less";
 import "./less/theme.less";
+import Button from "./components/Buttons/Button";
+import Icon from "./components/Icons/Icon";
 
 /** Define root */
 const rootElement = document.getElementById("app");
@@ -25,6 +27,14 @@ const App = () => {
           <IconAnchor href={"options.html"} newTab type={"options"} />
         </div>
       </Header>
+      <div className={clsx("button-container")}>
+        <h1>
+          <Icon type={"block"} />
+          This page is on your block list
+        </h1>
+        <Button>Unblock this page</Button>
+        <Button>Block this domain</Button>
+      </div>
       <ProvidersSorter>
         <div
           style={{ marginBottom: "0.83em" }}
@@ -34,7 +44,7 @@ const App = () => {
             style={{ margin: "0" }}
             className="flex-container row center space-between"
           >
-            Manage search engines
+            Manage blocked sites
           </h2>
           <HelpIcon notOpts={true} />
         </div>
