@@ -111,10 +111,8 @@ export const compareObjs = (
 
 export const sortablesFromProviders = (providers) => {
   const sortables = {
-    visible: providers.filter((p) => visible(p)),
-    hidden: providers.filter((p) => hidden(p)),
-    disabled: providers.filter((p) => disabled(p)),
-    none: providers.filter((p) => !visible(p) && !hidden(p) && !disabled(p)),
+    visible: providers.filter((p) => p.type === "Domain"),
+    hidden: providers.filter((p) => p.type === "Web page"),
   };
 
   return sortables;
@@ -139,7 +137,6 @@ export const placesHaveChanged = (array, providers) =>
   );
 
 export const set = (obj, callback) => {
-  console.log({ set: obj });
   chrome.storage.sync.set(obj, callback && callback());
 };
 

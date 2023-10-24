@@ -117,5 +117,24 @@
     "unit": "min",
     "pos": 5,
     "parentId": "allowRevisits"
+  },
+  "allowRevisitsDomain": {
+    "class": "settings",
+    "id": "allowRevisitsDomain",
+    "label": "Unblock within the same domain",
+    "description": "Allow visiting any website within the same domain when unblocked",
+    "type": "switch",
+    "pos": 6,
+    "value": true,
+    "parentId": "allowRevisits"
+  },
+  "blockDomainByDefault": {
+    "class": "settings",
+    "id": "blockDomainByDefault",
+    "label": "Block domains by default",
+    "description": "Block every website on the same domain whe adding to block list, unless otherwise specified",
+    "type": "switch",
+    "pos": 7,
+    "value": true
   }
 }

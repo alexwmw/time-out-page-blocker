@@ -62,6 +62,14 @@
     bottom: 4px;
     transition: @transition_time;
   }
+
+  .handle.notBool {
+    background-color: @control-bg;
+
+    &:before {
+      background-color: @control;
+    }
+  }
 }
 
 .time-control {

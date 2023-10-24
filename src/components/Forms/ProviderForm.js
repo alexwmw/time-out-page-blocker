@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext, useReducer } from "react";
-import GenericForm from "./GenericForm";
+import { useContext, useEffect, useReducer, useState } from "react";
+import ProviderFormButtons from "./ProviderFormButtons";
 import ProviderFormReducer from "/src/reducers/ProviderFormReducer";
 import ProviderFormFields from "./ProviderFormFields";
 import ChromeContext from "../../contexts/ChromeContext";
 import AlertsContext from "../../contexts/AlertsContext";
 import ProviderValidator from "../../modules/ProviderValidator";
-import { compareObjs, visible } from "../../modules/Utilities";
+import { compareObjs } from "../../modules/Utilities";
 
 function ProviderForm({ provider, closeForm }) {
   const { dispatchChrome } = useContext(ChromeContext);
@@ -58,14 +58,18 @@ function ProviderForm({ provider, closeForm }) {
   }, [formValues]);
 
   return (
-    <GenericForm
-      classes={{ submit: [hasChanges ? "hasChanges" : ""] }}
-      labels={{ submit: "Save" }}
-      deleteHandler={deleteHandler}
-      submitHandler={submitHandler}
-    >
+    <form onClick={(e) => e.stopPropagation()} onSubmit={submitHandler}>
       <ProviderFormFields dispatch={dispatchFormValues} values={formValues} />
-    </GenericForm>
+      <div className={"flex-container row width-100 right"}>
+        <div className="btn-area flex-container row right">
+          <ProviderFormButtons
+            classes={{ submit: [hasChanges ? "hasChanges" : ""] }}
+            labels={{ submit: "Save" }}
+            deleteHandler={deleteHandler}
+          />
+        </div>
+      </div>
+    </form>
   );
 }
 

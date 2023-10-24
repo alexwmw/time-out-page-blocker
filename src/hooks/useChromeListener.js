@@ -19,7 +19,7 @@ const useChromeListener = (callback, keyArray) => {
           }
         });
       }),
-    []
+    [],
   );
 };
 

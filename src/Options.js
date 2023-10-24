@@ -1,5 +1,5 @@
-import { createRoot } from "react-dom/client";
-import { useState, useReducer } from "react";
+import {createRoot} from "react-dom/client";
+import {useReducer, useState} from "react";
 import tabs from "./data/tabs.json";
 import TabContainer from "./components/Tabs/TabContainer";
 import ToastsContainer from "./components/Modals/ToastsContainer";
@@ -7,7 +7,7 @@ import OptionsContainer from "./components/Options/OptionsContainer";
 import Header from "./components/Headers/Header";
 import Card from "./components/Cards/Card";
 import ChromeContext from "./contexts/ChromeContext";
-import { ToastsContext, ToastsReducer } from "./reducers/ToastsReducer";
+import {ToastsContext, ToastsReducer} from "./reducers/ToastsReducer";
 import ChromeDispatcher from "./modules/ChromeDispatcher";
 import "./App.less";
 import "./Options.less";

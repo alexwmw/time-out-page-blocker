@@ -1,39 +1,24 @@
-import { useEffect, useState } from "react";
 import clsx from "clsx";
 import ProviderForm from "../Forms/ProviderForm";
-import Icon from "../Icons/Icon";
 import IconTrigger from "../Icons/IconTrigger";
 import "./SortableItem.less";
 import Img from "../Images/Img";
+import useExpanded from "../../hooks/useExpanded";
+
+export const Favicon = ({ url, provider, className }) => {
+  const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain_url=${
+    url ? `http://${url}` : provider.hostname
+  }`;
+  return <Img className={className} src={faviconUrl}></Img>;
+};
 
 function SortableItem({ provider, openItem, setOpenItem }) {
   /** State and local data */
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain_url=${provider.hostname}`;
+  const [isExpanded, setIsExpanded] = useExpanded(provider, openItem);
 
   const toggleExpanded = () => {
     setIsExpanded((expanded) => !expanded);
   };
-
-  useEffect(() => {
-    if (document.getElementsByClassName("expanded").length > 0) {
-      document.body.classList.add("expanded-open");
-    } else {
-      document.body.classList.remove("expanded-open");
-    }
-  }, [isExpanded]);
-
-  useEffect(() => {
-    if (openItem !== provider.name) {
-      setIsExpanded(false);
-    }
-  }, [openItem]);
-
-  /** on Unmount  */
-  useEffect(() => () => {
-    document.body.classList.remove("expanded-open");
-  });
 
   return (
     <li
@@ -43,7 +28,7 @@ function SortableItem({ provider, openItem, setOpenItem }) {
       onDragStart={(e) => setOpenItem(null)}
     >
       <div className={"li-header"}>
-        <Img className="li-favicon" src={faviconUrl}></Img>
+        <Favicon className="li-favicon" provider={provider}></Favicon>
         <div className="li-provider-name">
           <p>{provider.name}</p>
           <p>{provider.type ?? "Domain"}</p>
@@ -58,7 +43,7 @@ function SortableItem({ provider, openItem, setOpenItem }) {
         <ProviderForm
           provider={provider}
           closeForm={() => setIsExpanded(false)}
-        ></ProviderForm>
+        />
       )}
     </li>
   );

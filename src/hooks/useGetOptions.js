@@ -2,7 +2,7 @@ import { useState } from "react";
 import useChromeGet from "./useChromeGet";
 import useChromeListener from "./useChromeListener";
 
-const useGetOptions = (onOptionsChange) => {
+const useGetOptions = (onOptionsChange = () => {}) => {
   const [options, setOptions] = useState({});
 
   useChromeGet(

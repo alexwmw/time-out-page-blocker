@@ -3,7 +3,6 @@ import {
   faBan,
   faCheck,
   faCheckCircle,
-  faCircleDot,
   faCircleInfo,
   faClock,
   faCog,
@@ -11,6 +10,7 @@ import {
   faExclamationTriangle,
   faFlask,
   faFloppyDisk,
+  faGlobeEurope,
   faList,
   faListDots,
   faMinus,
@@ -21,14 +21,13 @@ import {
   faPlus,
   faQuestion,
   faQuestionCircle,
-  faRectangleList,
   faSearch,
   faSliders,
   faSort,
   faSun,
   faTimes,
-  faToggleOn,
   faTrashAlt,
+  faUnlockKeyhole,
 } from "@fortawesome/free-solid-svg-icons";
 
 const iconMap = (type) => {
@@ -64,7 +63,10 @@ const iconMap = (type) => {
       settings: { iconClass: faSliders, iconTitle: "Settings  icon" },
       sort: { iconClass: faSort, iconTitle: "Sort icon" },
       stop: { iconClass: faTimes, iconTitle: "Stop icon" },
+      time: { iconClass: faClock, iconTitle: "Time icon" },
+      unblocked: { iconClass: faUnlockKeyhole, iconTitle: "Unblocked icon" },
       warning: { iconClass: faExclamationTriangle, iconTitle: "Warning icon" },
+      world: { iconClass: faGlobeEurope, iconTitle: "World icon" },
     }[type] ?? {}
   );
 };

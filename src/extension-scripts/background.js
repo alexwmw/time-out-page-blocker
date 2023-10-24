@@ -1,21 +1,17 @@
 import legacyData from "../data/legacyData.js";
-import {
-  get,
-  set,
-  localizedOptions,
-  localizedProviders,
-} from "../modules/Utilities";
+import {get, set} from "../modules/Utilities";
 
 import convertLegacyData from "./convertLegacyData";
 
 // Localized objects
-const ext_options = localizedOptions();
-const ext_matches = localizedProviders();
+const ext_options = require("../data/options.json");
+// const ext_matches = localizedProviders();
 
 const devConfig = {
   setLegacyData: false,
   clearStoredData: false,
   clearStoredSyncData: false,
+  clearStoredMatchData: false,
   clearStoredLocalData: false,
 };
 
@@ -24,15 +20,20 @@ const sw_log = (...args) => {
 };
 
 if (devConfig.clearStoredSyncData || devConfig.clearStoredData) {
-  chrome.storage.sync.clear(() => sw_log("Sync storage was cleared"));
+  chrome.storage.sync.clear(() => {
+    sw_log("Sync storage was cleared");
+  });
 }
 if (devConfig.clearStoredLocalData || devConfig.clearStoredData) {
   chrome.storage.local.clear(() => sw_log("Local storage was cleared"));
 }
+if (devConfig.clearStoredMatchData) {
+  chrome.storage.sync.remove(["providers"]);
+}
 
 // Defaults for storage
 const defaults = {
-  providers: ext_matches,
+  providers: [],
   options: ext_options,
 };
 

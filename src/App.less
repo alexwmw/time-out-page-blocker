@@ -1,6 +1,9 @@
 @import "/src/less/body.less";
 @import "/src/less/_variables.less";
 
+@transition_time: 250ms;
+
+
 html {
   font-size: 16.5px;
 
@@ -77,9 +80,84 @@ body {
     }
   }
 
+  .banner {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    align-self: center;
+
+
+    text-decoration-color: var(--L1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+
+    &.current-url {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      font-size: 16px;
+    }
+
+    &.scheduling-on {
+      background-color: @Success;
+      color: @white;
+      padding-block: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 3px;
+
+      a {
+        font-weight: 400;
+        color: @white;
+
+        &:hover {
+          color: var(--P1)
+        }
+      }
+    }
+
+    img {
+      height: 20px;
+      width: 20px;
+    }
+
+    svg {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  .toggle-row {
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px;
+
+    p {
+      display: inline;
+      font-size: 12px;
+    }
+
+    > span:first-child {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    > span:last-child {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: 5px;
+      flex: 1
+    }
+
+  }
+
   .page-container {
     padding: 24px;
-    height: 530px;
     overflow-y: overlay;
     z-index: 0;
   }

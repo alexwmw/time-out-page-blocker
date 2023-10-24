@@ -1,12 +1,12 @@
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import ChromeContext from "../../contexts/ChromeContext";
 import "./Switch.less";
+import clsx from "clsx";
 
 const Switch = ({ settingId }) => {
   const { options, dispatchChrome } = useContext(ChromeContext);
   const [value, setValue] = useState(options[settingId].value);
   const isMounted = useRef(false);
-
   const changeHandler = (e) => {
     setValue(e.target.checked);
   };
@@ -25,7 +25,7 @@ const Switch = ({ settingId }) => {
 
   return (
     <>
-      <label className="switch">
+      <label className={clsx("switch")}>
         <input type={"checkbox"} checked={value} onChange={changeHandler} />
         <span className="handle" />
       </label>

@@ -2,67 +2,55 @@
   {
     "name": "Google",
     "hostname": "www.google.com",
-    "visibility": "visible",
     "type": "Domain"
   },
   {
     "name": "Wikipedia",
     "hostname": "www.wikipedia.org",
-    "visibility": "visible",
     "type": "Domain"
   },
   {
     "name": "YouTube",
     "hostname": "www.youtube.com",
-    "visibility": "visible",
     "type": "Domain"
   },
   {
     "name": "Gmail",
-    "hostname": "mail.google.com",
-    "visibility": "disabled"
+    "hostname": "mail.google.com"
   },
   {
     "name": "Google Drive",
-    "hostname": "drive.google.com",
-    "visibility": "disabled"
+    "hostname": "drive.google.com"
   },
   {
     "name": "Amazon",
     "hostname": "www.amazon.com",
-    "visibility": "hidden",
     "type": "Web page"
   },
   {
     "name": "DuckDuckGo",
     "hostname": "duckduckgo.com",
-    "visibility": "hidden",
     "type": "Web page"
   },
   {
     "name": "Reddit",
-    "hostname": "www.reddit.com",
-    "visibility": "disabled"
+    "hostname": "www.reddit.com"
   },
   {
     "name": "Spotify",
-    "hostname": "open.spotify.com",
-    "visibility": "disabled"
+    "hostname": "open.spotify.com"
   },
   {
     "name": "Twitter",
-    "hostname": "www.twitter.com",
-    "visibility": "disabled"
+    "hostname": "www.twitter.com"
   },
   {
     "name": "Facebook",
-    "hostname": "www.facebook.com",
-    "visibility": "disabled"
+    "hostname": "www.facebook.com"
   },
   {
     "name": "Google Translate",
     "hostname": "translate.google.com",
-    "visibility": "hidden",
     "type": "Web page"
   }
 ]

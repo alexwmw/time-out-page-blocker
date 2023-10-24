@@ -1,8 +1,6 @@
 import { useState, useContext, useMemo, useReducer } from "react";
 import ProviderFormReducer from "../../reducers/ProviderFormReducer";
 import Modal from "./Modal";
-import ProviderFormFields from "../Forms/ProviderFormFields";
-import GenericForm from "../Forms/GenericForm";
 import useAlerts from "../../hooks/useAlerts";
 import ProviderValidator from "../../modules/ProviderValidator";
 import ChromeDispatcher from "../../modules/ChromeDispatcher";
@@ -64,19 +62,7 @@ function AddProviderModal({ isOpen, setIsOpen }) {
       isOpen={isOpen}
     >
       <AlertProvider />
-      <GenericForm
-        labels={{ submit: "Save", close: "Cancel" }}
-        closeHandler={onClose}
-        submitHandler={onSubmit}
-      >
-        <ProviderFormFields
-          addNew={true}
-          dispatch={dispatchFormValues}
-          values={formValues}
-          tooltips={true}
-          //setHasChanges={setHasChanges}
-        />
-      </GenericForm>
+      // See ProviderForm
     </Modal>
   );
 }
