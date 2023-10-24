@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import "./Icon.less";
 import iconMap from "./iconMap";
+
 const IconTrigger = (props) => {
   const { iconClass, iconTitle } = iconMap(props.type);
 
@@ -9,7 +10,7 @@ const IconTrigger = (props) => {
     <span className={props.className} onClick={props.onClick}>
       <FontAwesomeIcon
         icon={iconClass || props.icon}
-        title={iconTitle || props.title}
+        title={props.title || iconTitle}
         className={clsx("icon", "trigger-icon", props.type)}
       />
     </span>

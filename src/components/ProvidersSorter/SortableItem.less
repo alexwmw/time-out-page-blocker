@@ -51,22 +51,11 @@ li.sortable-item {
     height: @row-height_expanded;
     cursor: default;
     background-color: var(--PA);
-    //border: solid 1px var(--P3);
-
-    .li-favicon {
-      transform: scale(1.2) translate(2px, 6px);
-    }
-
-    .li-provider-name {
-      transform: scale(1.1);
-    }
   }
-
 
   .li-header {
     width: 100%;
-    display: grid;
-    grid-template-columns: min-content 1fr min-content;
+    display: flex;
 
     // Children
     > * {
@@ -111,30 +100,61 @@ li.sortable-item {
         }
       }
 
-      &.li-expand-btn {
-        //position: absolute;
-        //right: 5px;
-        //top: 5px;
+      &.li-button-group {
+        flex: 1;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        align-self: center;
-        border-radius: 6px;
-        aspect-ratio: 1 / 1;
-        height: 24px;
+        justify-content: end;
 
-        text-align: center;
-        cursor: pointer;
 
-        .icon {
-          display: block;
-          width: 12px;
-          height: 12px;
-        }
+        .li-btn {
+          //position: absolute;
+          //right: 5px;
+          //top: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          align-self: center;
+          border-radius: 6px;
+          aspect-ratio: 1 / 1;
+          height: 24px;
 
-        &:hover {
-          background-color: var(--white);
-          color: var(--P1);
+          text-align: center;
+          cursor: pointer;
+
+          .icon {
+            display: block;
+            width: 12px;
+            height: 12px;
+          }
+
+          &.on:not(.expanded) {
+            background-color: @SuccessLight;
+
+            svg {
+              color: @Success
+            }
+
+            &:hover {
+              background-color: var(--white);
+              color: var(--P1);
+            }
+          }
+
+          &.off:not(.expanded) {
+            svg {
+              color: var(--L1)
+            }
+
+            &:hover {
+              background-color: var(--white);
+              color: var(--P1);
+            }
+          }
+
+          &:hover {
+            background-color: var(--white);
+            color: var(--P1);
+          }
         }
       }
     }

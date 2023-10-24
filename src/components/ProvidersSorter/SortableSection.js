@@ -1,6 +1,4 @@
 import clsx from "clsx";
-
-import { ReactSortable } from "react-sortablejs";
 import SortableItem from "./SortableItem";
 import "./SortableSection.less";
 
@@ -14,7 +12,7 @@ function SortableSection(props) {
         {list.map((p) => (
           <SortableItem
             provider={p}
-            key={p.name}
+            key={p.id}
             type={p.type ?? "Domain"}
             openItem={openItem}
             setOpenItem={setOpenItem}

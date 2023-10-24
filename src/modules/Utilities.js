@@ -47,12 +47,12 @@ export const localizedProviders = () => {
 };
 
 /** Helper function */
-export const getFromArray = (array, key, matchKey = "name") => {
+export const getFromArray = (array, key, matchKey = "id") => {
   return array.filter((obj) => obj[matchKey] === key)[0];
 };
 
 /** Helper function */
-export const replaceObjectInArray = (array, newObject, matchKey = "name") => {
+export const replaceObjectInArray = (array, newObject, matchKey = "id") => {
   const itemIndex = array.findIndex(
     (object) => object[matchKey] === newObject[matchKey],
   );
@@ -127,12 +127,14 @@ export const arrayFromSortables = (sortables) => {
   ]);
 };
 
+export const createUniqueId = () => "id" + Math.random().toString(16).slice(2);
+
 export const sortIsFinished = (array) => array.every((p) => p.chosen !== true);
 
 export const placesHaveChanged = (array, providers) =>
   array.some(
     (e, i, a) =>
-      a[i].name !== providers[i].name ||
+      a[i].id !== providers[i].id ||
       a[i].visibility !== providers[i].visibility,
   );
 

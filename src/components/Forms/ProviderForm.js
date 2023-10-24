@@ -40,7 +40,7 @@ function ProviderForm({ provider, closeForm }) {
 
     alertHandler.confirm({
       title: "Confirm delete",
-      question: `Are you sure you want to delete \"${provider.name}\"?`,
+      question: `Are you sure you want to delete \"${provider.hostname}\"?`,
       onProceed: () =>
         dispatchChrome({
           type: "DELETE_PROVIDER",

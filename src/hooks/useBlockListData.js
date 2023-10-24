@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
-import useChromeGet from "./useChromeGet";
-import { get, set } from "../modules/Utilities";
-
-// const getBlockList = async (setBlockList) => {
-//   const blockList = getAsync(["providers"]);
-//   setBlockList(blockList);
-// };
-//
-// const useGetBlockList = (setBlockList, deps = []) => {
-//   useEffect(() => {
-//     getBlockList(setBlockList);
-//   }, [setBlockList, ...deps]);
-// };
+import { createUniqueId, get, set } from "../modules/Utilities";
 
 const useBlockList = (currentTab, blockDomain) => {
   const [protocol, url] = currentTab?.url?.split(`//`) ?? [];
@@ -29,12 +17,13 @@ const useBlockList = (currentTab, blockDomain) => {
 
   const addToBlockList = () => {
     get(["providers"], ({ providers }) => {
+      const uniqueId = createUniqueId();
       const obj = {
-        name: blockDomain ? domain : url,
+        id: uniqueId,
         hostname: blockDomain ? domain : url,
         type: blockDomain ? "Domain" : "Web page",
       };
-      if (providers?.some((item) => item.name === obj.name)) {
+      if (providers?.some((item) => item.hostname === obj.hostname)) {
         alert("Site is already on block list!");
         return;
       }
@@ -46,10 +35,10 @@ const useBlockList = (currentTab, blockDomain) => {
     get(["providers"], ({ providers }) => {
       const filteredList = providers.filter((item) => {
         if (item.type === "Domain") {
-          return !item.name === domain;
+          return !item.hostname === domain;
         }
         if (item.type === "Web page" || item.type === "Webpage") {
-          return !item.name === url;
+          return !item.hostname === url;
         }
         throw Error("Unknown blockList item type");
       });
@@ -61,8 +50,8 @@ const useBlockList = (currentTab, blockDomain) => {
     setIsBlockedSite(
       newValue?.some((item) => {
         return (
-          (item.type === "Domain" && item.name === domain) ||
-          (item.type === "Web page" && item.name === url)
+          (item.type === "Domain" && item.hostname === domain) ||
+          (item.type === "Web page" && item.hostname === url)
         );
       }),
     );

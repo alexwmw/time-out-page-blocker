@@ -1,16 +1,12 @@
 import isValidHostname from "is-valid-hostname";
-import { isValidURL } from "./Utilities";
 import schema from "../schemas/providersSchema.json";
 
 const ProviderValidator = (provider, providers = null) => {
   /** Validate each of the providers properties */
 
-  const nameExists =
-    providers &&
-    providers.some((p) => p.name.toLowerCase() == provider.name.toLowerCase());
+  const idExists = providers && providers.some((p) => p.id == provider.id);
 
-  const validName =
-    !nameExists && RegExp(schema.properties.name.pattern).test(provider.name);
+  const validId = !idExists;
 
   const validHostname =
     isValidHostname(provider.hostname) && provider.hostname.indexOf(".") > -1;
@@ -23,11 +19,11 @@ const ProviderValidator = (provider, providers = null) => {
   const report = {};
 
   report.name =
-    validName ||
-    (provider.name === ""
-      ? "Name cannot be blank."
-      : `\"${provider.name}\" is not a valid name.${
-          nameExists && ` Name already exists. Please use a unique name.`
+    validId ||
+    (provider.id === ""
+      ? "ID cannot be blank."
+      : `\"${provider.id}\" is not a valid ID.${
+          idExists && ` ID already exists. Please use a unique ID.`
         }`);
 
   report.hostname =

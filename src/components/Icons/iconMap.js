@@ -1,4 +1,5 @@
 import {
+  faArrowDownUpAcrossLine,
   faArrowRotateLeft,
   faBan,
   faCheck,
@@ -63,6 +64,7 @@ const iconMap = (type) => {
       settings: { iconClass: faSliders, iconTitle: "Settings  icon" },
       sort: { iconClass: faSort, iconTitle: "Sort icon" },
       stop: { iconClass: faTimes, iconTitle: "Stop icon" },
+      swap: { iconClass: faArrowDownUpAcrossLine, iconTitle: "Swap icon" },
       time: { iconClass: faClock, iconTitle: "Time icon" },
       unblocked: { iconClass: faUnlockKeyhole, iconTitle: "Unblocked icon" },
       warning: { iconClass: faExclamationTriangle, iconTitle: "Warning icon" },

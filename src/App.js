@@ -37,7 +37,6 @@ const App = () => {
     setIsBlockDomain(e.target.checked);
   };
 
-  const NotValidWarn = <p>This page cannot be blocked</p>;
   const currentUrl = (currentTab?.url?.split(`//`) ?? [])[1]?.split("/")[0];
   return (
     <div className={clsx("app", "flex-container", "column")}>
@@ -46,19 +45,28 @@ const App = () => {
           <IconAnchor href={"options.html"} newTab type={"options"} />
         </div>
       </Header>
-      {!isValidSite && NotValidWarn}
+      {schedulingOn && (
+        <p className={"scheduling-on banner"}>
+          <Icon icon={"time"} />
+          Scheduling is on
+          <a target={"_blank"} href="options.html?tab=scheduling">
+            Edit
+          </a>
+        </p>
+      )}{" "}
+      {!isValidSite && (
+        <div className={clsx("button-container")}>
+          <h1>
+            <Icon type={"stop"} />
+            This page cannot be blocked
+          </h1>
+          <Button onClick={() => window.open("options.html")}>
+            Go to settings
+          </Button>
+        </div>
+      )}
       {isValidSite && (
         <>
-          {schedulingOn && (
-            <p className={"scheduling-on banner"}>
-              <Icon icon={"time"} />
-              Scheduling is on
-              <a target={"_blank"} href="options.html">
-                Edit
-              </a>
-            </p>
-          )}
-
           <div className={clsx("button-container")}>
             <p className={"current-url banner"}>
               <Favicon url={currentUrl} /> {currentUrl}
@@ -71,7 +79,15 @@ const App = () => {
                     ? "Site added to block list"
                     : "This page is on your block list"}
                 </h1>
-                <Button onClick={removeFromBlockList}>Unblock this page</Button>
+                {added ? (
+                  <Button onClick={removeFromBlockList}>
+                    Unblock this page
+                  </Button>
+                ) : (
+                  <Button onClick={() => window.open("options.html")}>
+                    Manage block list
+                  </Button>
+                )}
                 {added && <Button onClick={() => {}}>Refresh site</Button>}
               </>
             )}
@@ -104,6 +120,9 @@ const App = () => {
                     <p>Domain</p>
                   </span>
                 </div>
+                <a target="_blank" href={"options.html"}>
+                  Manage block list
+                </a>
               </>
             )}
           </div>

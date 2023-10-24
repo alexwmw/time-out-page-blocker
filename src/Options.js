@@ -32,6 +32,15 @@ const Options = () => {
   /** Define tabs */
   const defaultTab = tabs.search;
   const [selectedTab, setSelectedTab] = useState(defaultTab);
+  const [wasRouted, setWasRouted] = useState(false);
+  const queryParameters = new URLSearchParams(window.location.search);
+  const tabRoute = queryParameters.get("tab");
+
+  if (!wasRouted && tabRoute) {
+    setSelectedTab(tabs[tabRoute]);
+    setWasRouted(true);
+    window.history.replaceState(null, "", "/options.html");
+  }
 
   /** Custom dispatcher */
   const dispatchChrome = ChromeDispatcher;

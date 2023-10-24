@@ -11,7 +11,7 @@ const useExpanded = (provider, openItem) => {
   }, [isExpanded]);
 
   useEffect(() => {
-    if (openItem !== provider.name) {
+    if (openItem !== provider.id) {
       setIsExpanded(false);
     }
   }, [openItem]);

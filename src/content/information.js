@@ -16,8 +16,8 @@ const information = [
   ### Search provider settings
   You can edit the settings of each search provider by clicking on the **⋮ more** icons on the **search providers** tab. The requirements for each form field are:\n\n
   <div>
-  #### Provider name
-  A unique name for the search provider.
+  #### Provider ID
+  A unique ID for the search provider.
   #### Hostname
   The website to be searched. Usually this will be everything between and including 'www' and '.com'. Examples include: www.example.com, site.example.org, example.de
   #### Query path
@@ -45,7 +45,7 @@ const information = [
   `
   ### Opening a search in the background
   It is possible to open searches in a background tab so as not to interrupt your browsing experience. \n\nYou can do so by pressing and holding the **${modKey(
-    navigator.userAgent
+    navigator.userAgent,
   )} key** when clicking on the search icon; or if you have a mouse, clicking the icon using the scroll wheel/middle button. (This functionality is the same for all hyperlinks in Chrome.)
   `,
   `

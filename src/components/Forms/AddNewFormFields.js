@@ -4,16 +4,16 @@ import Button from "../Buttons/Button";
 import Alert from "../Modals/Alert";
 import FormField from "./FormField";
 
-function AddNewFormFields({ dispatch, name, tooltips }) {
+function AddNewFormFields({ dispatch, id, tooltips }) {
   const [searchString, setSearchString] = useState("");
   const [removeParameters, setRemoveParameters] = useState(true);
   const [alertIsOpen, setAlertIsOpen] = useState(false);
   const [alertStr, setAlertStr] = useState("");
 
-  const onParseSuccess = (name, hostname) => {
+  const onParseSuccess = (id, hostname) => {
     dispatch({
       type: "SET_ALL",
-      name: name,
+      id: id,
       hostname: hostname,
     });
     dispatch({
@@ -85,12 +85,12 @@ function AddNewFormFields({ dispatch, name, tooltips }) {
       <hr />
       <h3>New provider details</h3>
       <FormField
-        label={"Name"}
-        value={name}
+        label={"Id"}
+        value={id}
         required={true}
-        setValue={(value) => dispatch({ type: "SET_NAME", value: value })}
-        formatField={() => dispatch({ type: "FORMAT_NAME" })}
-        tooltipText={"A unique name for the search provider"}
+        setValue={(value) => dispatch({ type: "SET_ID", value: value })}
+        formatField={() => dispatch({ type: "FORMAT_ID" })}
+        tooltipText={"A unique ID for the search provider"}
         showTooltip={tooltips}
       />
     </>

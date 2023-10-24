@@ -1,12 +1,6 @@
 import OCSfunctions from "/src/data/functions.json";
 import defaultOptions from "/src/data/options.json";
-import {
-  replaceObjectInArray,
-  set,
-  get,
-  sortByPosition,
-  localizedProviders,
-} from "./Utilities";
+import {get, localizedProviders, replaceObjectInArray, set, sortByPosition,} from "./Utilities";
 
 // Localize strings
 const OCSproviders = localizedProviders();
@@ -38,9 +32,10 @@ const ChromeDispatcher = (action, callback = () => {}) => {
     case "DELETE_PROVIDER":
       get(["providers"], (result) =>
         set({
-          providers: result.providers.filter(
-            (p) => p.name !== action.provider.name,
-          ),
+          providers: result.providers.filter((p) => {
+            console.log(p, action.provider);
+            return p.id !== action.provider.id;
+          }),
         }),
       );
       break;

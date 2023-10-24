@@ -1,4 +1,4 @@
-import { useState, useContext, useMemo, useReducer } from "react";
+import { useContext, useMemo, useReducer, useState } from "react";
 import ProviderFormReducer from "../../reducers/ProviderFormReducer";
 import Modal from "./Modal";
 import useAlerts from "../../hooks/useAlerts";
@@ -13,7 +13,7 @@ function AddProviderModal({ isOpen, setIsOpen }) {
   const { dispatchToasts } = useContext(ToastsContext);
   const { alertHandler, AlertProvider } = useAlerts();
   const defaults = useMemo(() => ({
-    name: "",
+    id: "",
     hostname: "",
     visibility: "hidden",
   }));

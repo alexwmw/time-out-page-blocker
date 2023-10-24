@@ -30,7 +30,7 @@ body {
     z-index: 1;
 
     img {
-      height: 22px;
+      height: 18px;
     }
 
     h1 {
@@ -75,7 +75,11 @@ body {
 
       svg {
         height: 40px;
-        color: var(--P1)
+        color: var(--P1);
+
+        &.stop {
+          color: @Danger;
+        }
       }
     }
   }
@@ -134,11 +138,11 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 4px;
 
     p {
       display: inline;
       font-size: 12px;
+      margin-block: 0;
     }
 
     > span:first-child {

@@ -1,5 +1,5 @@
 const ProviderFormReducer = (state, action) => {
-  const formatN = (str) => str.trim();
+  const formatID = (str) => str.trim();
 
   const formatHN = (str) =>
     str
@@ -22,18 +22,18 @@ const ProviderFormReducer = (state, action) => {
       .toLowerCase();
 
   switch (action.type) {
-    case "SET_NAME":
-      return { ...state, name: action.value };
+    case "SET_ID":
+      return { ...state, id: action.value };
     case "SET_HOSTNAME":
       return { ...state, hostname: action.value };
-    case "FORMAT_NAME":
-      return { ...state, name: formatN(state.name) };
+    case "FORMAT_ID":
+      return { ...state, id: formatID(state.id) };
     case "FORMAT_HOSTNAME":
       return { ...state, hostname: formatHN(state.hostname) };
     case "SET_ALL":
       return {
         ...state,
-        name: action.name,
+        id: action.id,
         hostname: action.hostname,
         type: action.type,
       };

@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import SortableSection from "./SortableSection";
 import ChromeContext from "../../contexts/ChromeContext";
 import ChromeDispatcher from "../../modules/ChromeDispatcher";
 import useChromeGet from "../../hooks/useChromeGet";
-import useChromeListener from "../../hooks/useChromeListener";
 import { sortablesFromProviders } from "../../modules/Utilities";
 import AlertsContext from "../../contexts/AlertsContext";
 import useAlerts from "../../hooks/useAlerts";
@@ -26,13 +25,19 @@ const ProvidersSorter = (props) => {
     ["providers"],
   );
 
-  /** Update providers when changes occur elsewhere in the extension */
-  useChromeListener(
-    ({ oldValue, newValue }) => {
-      setProviders(newValue);
-    },
-    ["providers"],
-  );
+  const onStorageChange = (changes, namespace) => {
+    if (
+      Object.keys(changes["providers"]?.newValue)?.length ||
+      Object.keys(changes["providers"]?.oldValue)?.length
+    ) {
+      setProviders(changes["providers"]?.newValue);
+    }
+  };
+
+  useEffect(() => {
+    chrome.storage.onChanged.removeListener(onStorageChange);
+    chrome.storage.onChanged.addListener(onStorageChange);
+  }, []);
 
   return (
     <>
