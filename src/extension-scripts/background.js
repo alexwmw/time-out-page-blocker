@@ -1,5 +1,5 @@
 import legacyData from "../data/legacyData.js";
-import {get, set} from "../modules/Utilities";
+import {get, getAsync, replaceObjectInArray, set} from "../modules/Utilities";
 
 import convertLegacyData from "./convertLegacyData";
 
@@ -50,4 +50,38 @@ if (devConfig.setLegacyData) {
   });
 }
 
+chrome.runtime.onMessage.addListener(({ action, id }) => {
+  const unblockProvider = async () => {
+    let { providers } = await getAsync(["providers"]);
+    const provider = providers.filter((p) => p.id === id)[0];
+    console.log({ onMessageProvider: provider });
+    providers = replaceObjectInArray(
+      providers,
+      {
+        ...provider,
+        unblocked: false,
+      },
+      "id",
+    );
+    set({ providers });
+  };
+
+  if (action === "unblock") {
+    get(["options"], ({ options }) => {
+      const allowRevisits = options.allowRevisits.value;
+      const time = !allowRevisits ? 1000 : options.revisitLimit.value * 60000;
+      setTimeout(unblockProvider, time);
+    });
+  }
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  (async function () {
+    let { providers } = getAsync([providers]);
+    if (Array.isArray(providers)) {
+      providers = providers.map((p) => (p.unblocked = false));
+      set({ providers });
+    }
+  })();
+});
 convertLegacyData();

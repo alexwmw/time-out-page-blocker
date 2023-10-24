@@ -10,6 +10,7 @@ module.exports = {
     content: "./src/extension-scripts/content.js",
     options: "./src/Options.js",
     app: "./src/App.js",
+    "page-block": "./src/PageBlock.js",
   },
   devtool: "inline-source-map",
   devServer: {
@@ -28,10 +29,17 @@ module.exports = {
       filename: "options.html",
       chunks: ["options"],
     }),
+    new HtmlWebpackPlugin({
+      title: "Page block",
+      template: "./src/page-block.html",
+      filename: "page-block.html",
+      chunks: ["page-block"],
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: path.resolve(__dirname, "src/manifest.json"), to: "." },
         { from: path.resolve(__dirname, "src/icons"), to: "icons" },
+        { from: path.resolve(__dirname, "src/images"), to: "images" },
         { from: path.resolve(__dirname, "src/_locales"), to: "_locales" },
       ],
     }),
