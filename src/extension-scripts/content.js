@@ -1,18 +1,19 @@
-import { getAsync, sanitize } from "../modules/Utilities";
+import { getAsync, getBlockPredicates, sanitize } from "../modules/Utilities";
 
 (async function () {
-  const { providers } = await getAsync("providers");
-  const { options } = await getAsync("options");
+  const { providers, options } = await getAsync(["providers", "options"]);
   const hostname = window.location.hostname;
   const url = sanitize(window.location.href.split("://")[1]);
+  const { isScheduled, isBlockingDay, isBlockingTime } =
+    getBlockPredicates(options);
 
-  console.log(url);
-
-  const matches = providers.filter(
-    (provider) =>
-      (provider.type === "Web page" && provider.hostname === url) ||
-      (provider.type === "Domain" && provider.hostname === hostname),
-  );
+  const matches = providers.filter((provider) => {
+    console.log(url, <provider className="hostname"></provider>);
+    return (
+      (provider.isByPath && url.startsWith(provider.hostname)) ||
+      provider.hostname === url
+    );
+  });
 
   const redirect = `chrome-extension://${
     chrome.runtime.id
@@ -21,5 +22,8 @@ import { getAsync, sanitize } from "../modules/Utilities";
   if (!matches[0] || matches[0].unblocked) {
     return;
   }
-  window.location = redirect;
+
+  if (!isScheduled || (isBlockingDay && isBlockingTime)) {
+    window.location.assign(redirect);
+  }
 })();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createUniqueId, get, sanitize, set } from "../modules/Utilities";
 
-const useBlockList = (currentTab, blockDomain) => {
+const useBlockList = (currentTab, isByPath) => {
   const [protocol, url] = currentTab?.url?.split(`//`) ?? [];
   const isValidSite = ["http:", "https:"].some(
     (prt) => prt === protocol?.toLowerCase(),
@@ -9,21 +9,37 @@ const useBlockList = (currentTab, blockDomain) => {
   const domain = sanitize(url?.split("/")[0]);
   const [isBlockedSite, setIsBlockedSite] = useState(false);
 
-  console.log(url);
-
   useEffect(() => {
     get(["providers"], ({ providers }) => {
       onBlockListChange({ newValue: providers });
     });
   }, [domain, url]);
 
-  const addToBlockList = () => {
+  const addPageToBlockList = () => {
     get(["providers"], ({ providers }) => {
       const uniqueId = createUniqueId();
       const obj = {
         id: uniqueId,
-        hostname: blockDomain ? domain : sanitize(url),
-        type: blockDomain ? "Domain" : "Web page",
+        hostname: sanitize(url),
+        isByPath,
+      };
+      const matches = providers.filter(
+        (item) => item.hostname === obj.hostname,
+      );
+      if (matches.length === 0) {
+        set({ providers: [...providers, obj] });
+        return;
+      }
+      alert("Site is already on block list!");
+    });
+  };
+  const addDomainToBlockList = () => {
+    get(["providers"], ({ providers }) => {
+      const uniqueId = createUniqueId();
+      const obj = {
+        id: uniqueId,
+        hostname: domain,
+        isByPath,
       };
       const matches = providers.filter(
         (item) => item.hostname === obj.hostname,
@@ -36,26 +52,12 @@ const useBlockList = (currentTab, blockDomain) => {
     });
   };
 
-  const removeFromBlockList = () => {
-    get(["providers"], ({ providers }) => {
-      const filteredList = providers.filter((item) => {
-        if (item.type === "Domain") {
-          return !item.hostname === domain;
-        }
-        if (item.type === "Web page" || item.type === "Webpage") {
-          return !item.hostname === sanitize(url) || !item.hostname === url;
-        }
-        throw Error("Unknown blockList item type");
-      });
-      set({ providers: filteredList });
-    });
-  };
-
   function onBlockListChange({ newValue }) {
     setIsBlockedSite(
       newValue?.some((item) => {
+        console.log({ ...item, url });
         return (
-          (item.type === "Domain" && item.hostname === domain) ||
+          (item.isByPath && url.startsWith(item.hostname)) ||
           item.hostname === sanitize(url)
         );
       }),
@@ -64,8 +66,8 @@ const useBlockList = (currentTab, blockDomain) => {
 
   const onStorageChange = (changes, namespace) => {
     if (
-      Object.keys(changes["providers"]?.newValue)?.length ||
-      Object.keys(changes["providers"]?.oldValue)?.length
+      Object.keys(changes["providers"]?.newValue ?? {})?.length ||
+      Object.keys(changes["providers"]?.oldValue ?? {})?.length
     ) {
       onBlockListChange(changes["providers"]);
     }
@@ -78,6 +80,11 @@ const useBlockList = (currentTab, blockDomain) => {
     }
   }, [domain, url]);
 
-  return { isValidSite, isBlockedSite, addToBlockList, removeFromBlockList };
+  return {
+    isValidSite,
+    isBlockedSite,
+    addPageToBlockList,
+    addDomainToBlockList,
+  };
 };
 export default useBlockList;

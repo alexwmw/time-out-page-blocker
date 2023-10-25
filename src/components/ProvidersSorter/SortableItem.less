@@ -1,8 +1,8 @@
 @import "/src/less/_variables.less";
 
-@row-height: 35px;
-@row-height_expanded: 148px;
-@row-padding: 8px;
+@row-height: 50px;
+@row-height_expanded: 50px;
+@row-padding: 10px;
 @favicon-height: 20px;
 @transition-time: 200ms;
 
@@ -56,6 +56,7 @@ li.sortable-item {
   .li-header {
     width: 100%;
     display: flex;
+    align-items: center;
 
     // Children
     > * {
@@ -159,84 +160,46 @@ li.sortable-item {
       }
     }
   }
-}
 
-li.sortable-item form {
-  text-align: right;
-  font-size: 10pt;
-  font-weight: 700;
-  margin-top: 8px;
 
-  > div {
-    //width: unset;
-
-    &:last-child {
-      margin-block: 0;
-    }
-  }
-
-  label {
-    flex: 0.3;
-    text-transform: uppercase;
-    padding-right: 5px;
-  }
-
-  input {
-    flex: 1;
-    border: none;
-    font-size: 10pt;
-    outline: none;
-    height: 18px;
-    max-width: 360px;
-    margin: 3px 10px;
-    justify-self: right;
-  }
-
-  .btn {
-    cursor: pointer;
-    width: 76px;
-    padding: 4px 3px !important;
-    margin: 3px 10px;
-    border-radius: 6px;
-    border: @invisible-border;
-    gap: 8px;
-
+  .switch-row {
+    font-size: 9pt;
+    font-weight: 400;
+    margin-top: 8px;
     display: flex;
+    flex-direction: row;
+    width: fit-content;
+    gap: 10px;
+    position: relative;
+    left: -7px;
+    cursor: pointer;
+
     align-items: center;
-    justify-content: center;
 
-    color: @text-color;
-    background: transparent;
+    .switch {
+      transform: scale(0.8);
 
-    font-size: 10pt;
+      input:checked + .handle {
+        outline-color: @Success;
+      }
 
-    .icon {
-      font-size: 15px;
-    }
+      input:checked + .handle:before {
+        background-color: @Success;
+      }
 
-    &.submitBtn.hasChanges {
-      //background-color: white;
-      font-weight: 700;
-      // border-color: var(--A2);
-      color: var(--A2);
-      background-color: var(--L4);
-
-      &:active {
-        color: var(--A1);
+      input:checked + .handle {
+        background-color: var(--L4);
       }
     }
 
-    &:hover {
-      background-color: var(--white);
-      color: var(--P1);
+
+    &:not(.by-path) span {
+      color: var(--L1);
     }
 
-    &:active {
-      color: var(--P2);
-    }
-
-    &.hidden {
-      display: none;
+    &.by-path span {
+      color: var(--D1);
     }
   }
+
 }

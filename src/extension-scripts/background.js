@@ -1,14 +1,10 @@
 import legacyData from "../data/legacyData.js";
-import {get, getAsync, replaceObjectInArray, set} from "../modules/Utilities";
-
-import convertLegacyData from "./convertLegacyData";
-
-// Localized objects
-const ext_options = require("../data/options.json");
-// const ext_matches = localizedProviders();
+import ext_options from "../data/options.json";
+import { get, getAsync, replaceObjectInArray, set } from "../modules/Utilities";
+import convertLegacyData from "../modules/convertLegacyData";
 
 const devConfig = {
-  setLegacyData: true,
+  setLegacyData: false,
   clearStoredData: false,
   clearStoredSyncData: false,
   clearStoredMatchData: false,
@@ -51,7 +47,6 @@ if (devConfig.setLegacyData) {
           unblocked: false,
         };
       });
-      console.log(result.providers);
     }
     set(result, () => {
       sw_log("This object was set in storage:\n", result);
@@ -63,23 +58,24 @@ chrome.runtime.onMessage.addListener(({ action, id }) => {
   const unblockProvider = async () => {
     let { providers } = await getAsync(["providers"]);
     const provider = providers.filter((p) => p.id === id)[0];
-    sw_log("Unblocking provider", provider);
-    providers = replaceObjectInArray(
-      providers,
-      {
-        ...provider,
-        unblocked: false,
-      },
-      "id",
-    );
-    set({ providers });
+    if (provider) {
+      sw_log("Unblocking provider", provider);
+      providers = replaceObjectInArray(
+        providers,
+        {
+          ...provider,
+          unblocked: false,
+        },
+        "id",
+      );
+      set({ providers });
+    }
   };
 
   if (action === "unblock") {
     get(["options"], ({ options }) => {
       const allowRevisits = options.allowRevisits.value;
       const time = !allowRevisits ? 1000 : options.revisitLimit.value * 60000;
-      let t = time;
       sw_log(
         "Setting unblock timeout for provider",
         id,

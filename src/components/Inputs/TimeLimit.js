@@ -56,8 +56,8 @@ const TimeLimit = ({ settingId }) => {
 
   const disabledByToggle = allDay.value === true;
   const disabledByLogic =
-    startTime == options[settingId].value.start.value &&
-    endTime == options[settingId].value.end.value;
+    startTime === options[settingId].value.start.value &&
+    endTime === options[settingId].value.end.value;
 
   const switchItem = (
     <div key={allDay.label} className={clsx("row", "time-row")}>

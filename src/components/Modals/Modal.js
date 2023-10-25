@@ -30,7 +30,7 @@ function Modal(props) {
       ref.current?.show();
     } else {
       ref.current?.close();
-      if (document.getElementsByClassName("modal").length == 0) {
+      if (document.getElementsByClassName("modal").length === 0) {
         document.body.classList.remove("modal-open");
       }
     }
@@ -43,7 +43,7 @@ function Modal(props) {
           className={clsx(
             "modal",
             (hasTitleBar || isClosable) && "title-bar-modal",
-            classes
+            classes,
           )}
           ref={ref}
           onCancel={onClose}

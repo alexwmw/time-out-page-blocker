@@ -6,8 +6,8 @@ function SortableSection(props) {
   const { name, id, list, openItem, setOpenItem } = props;
 
   return (
-    <div className={clsx("sortable-section", list.length == 0 && "empty")}>
-      <h3 className="section-name">{name}</h3>
+    <div className={clsx("sortable-section", list.length === 0 && "empty")}>
+      {/*<h3 className="section-name">{name}</h3>*/}
       <ul id={id}>
         {list.map((p) => (
           <SortableItem

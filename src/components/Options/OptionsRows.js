@@ -14,7 +14,7 @@ const OptionRows = ({ selectedTab }) => {
   const { options } = useContext(ChromeContext);
 
   const optionsToDisplay = Object.values(options)
-    .filter((setting) => setting.class == selectedTab.id)
+    .filter((setting) => setting.class === selectedTab.id)
     .sort((a, b) => {
       return a.pos - b.pos;
     });
@@ -72,7 +72,7 @@ const OptionRows = ({ selectedTab }) => {
           </div>
         );
       default:
-        () => console.error("no match");
+        console.error("no match");
         return;
     }
   };

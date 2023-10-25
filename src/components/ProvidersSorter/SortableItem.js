@@ -4,7 +4,7 @@ import IconTrigger from "../Icons/IconTrigger";
 import "./SortableItem.less";
 import Img from "../Images/Img";
 import useExpanded from "../../hooks/useExpanded";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ChromeContext from "../../contexts/ChromeContext";
 import AlertsContext from "../../contexts/AlertsContext";
 
@@ -17,14 +17,10 @@ export const Favicon = ({ url, provider, className }) => {
 
 function SortableItem({ provider, openItem, setOpenItem }) {
   /** State and local data */
-  const [isExpanded, setIsExpanded] = useExpanded(provider, openItem);
-  const [isScheduled, setIsScheduled] = useState(null);
+  const [isByPath, setIsByPath] = useState(provider.isByPath ?? false);
+  const [isScheduled] = useState(false);
   const { dispatchChrome } = useContext(ChromeContext);
   const alertHandler = useContext(AlertsContext);
-
-  const toggleExpanded = () => {
-    setIsExpanded((expanded) => !expanded);
-  };
 
   const deleteHandler = (e) => {
     e.preventDefault();
@@ -40,31 +36,24 @@ function SortableItem({ provider, openItem, setOpenItem }) {
     });
   };
 
-  const switchHandler = (e) => {
-    e.preventDefault();
-    const type = provider.type == "Domain" ? "Web page" : "Domain";
-    const hostname = provider.hostname.split("/")[0];
-    const onProceed = () =>
-      dispatchChrome({
-        type: "UPDATE_PROVIDER",
-        provider: { ...provider, hostname, type },
-      });
-
-    if (type === "Domain" && hostname !== provider.hostname) {
-      alertHandler.confirm({
-        title: "Change block type",
-        question: `Are you sure you want to change this entry type from 'web page' to 'domain'? Details of the specific web page will be lost.`,
-        onProceed,
-      });
-      return;
-    }
-    onProceed();
+  const handleTogglePath = (e) => {
+    setIsByPath(e.target.checked);
   };
+
+  useEffect(() => {
+    dispatchChrome({
+      type: "UPDATE_PROVIDER",
+      provider: {
+        ...provider,
+        isByPath,
+      },
+    });
+  }, [isByPath]);
 
   return (
     <li
       data-id={provider.id}
-      className={clsx("sortable-item", isExpanded && ["expanded"])}
+      className={clsx("sortable-item")}
       onClick={(e) => setOpenItem(provider.id)}
       onDragStart={(e) => setOpenItem(null)}
     >
@@ -72,41 +61,36 @@ function SortableItem({ provider, openItem, setOpenItem }) {
         <Favicon className="li-favicon" provider={provider}></Favicon>
         <div className="li-provider-name">
           <p>{provider.hostname}</p>
-          <p>{provider.type ?? "Domain"}</p>
         </div>
         <div className={"li-button-group"}>
           <IconTrigger
             className={clsx("li-btn")}
-            onClick={switchHandler}
-            title={"Swap between domain and webpage"}
-            type={"swap"}
+            onClick={deleteHandler}
+            type={"delete"}
           />
-          {isScheduled !== null && (
-            <IconTrigger
-              className={clsx(
-                "li-btn",
-                isScheduled ? "on" : "off",
-                isExpanded && "expanded",
-              )}
-              onClick={toggleExpanded}
-              type={!isExpanded ? "time" : "collapse"}
-            />
-          )}
-          {!isExpanded && (
-            <IconTrigger
-              className={clsx("li-btn")}
-              onClick={deleteHandler}
-              type={"delete"}
-            />
-          )}
+
+          {/*<IconTrigger*/}
+          {/*  className={clsx(*/}
+          {/*    "li-btn",*/}
+          {/*    isScheduled ? "on" : "off",*/}
+          {/*    isExpanded && "expanded",*/}
+          {/*  )}*/}
+          {/*  onClick={toggleExpanded}*/}
+          {/*  type={!isExpanded ? "edit" : "collapse"}*/}
+          {/*/>*/}
         </div>
       </div>
-      {isExpanded && (
-        <ProviderForm
-          provider={provider}
-          closeForm={() => setIsExpanded(false)}
-        />
-      )}
+      <label className={clsx("switch-row", isByPath && "by-path")}>
+        <label className={"switch"}>
+          <input
+            checked={isByPath}
+            onChange={handleTogglePath}
+            type={"checkbox"}
+          />
+          <div className={"handle"} />
+        </label>
+        <span>Block subpages</span>
+      </label>
     </li>
   );
 }

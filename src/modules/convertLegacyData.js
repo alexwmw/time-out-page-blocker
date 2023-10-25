@@ -1,4 +1,4 @@
-import { createUniqueId, getAsync, set } from "../modules/Utilities";
+import { createUniqueId, getAsync, set } from "./Utilities";
 
 const convertLegacyData = async function (callback) {
   const uniqueId = () => createUniqueId();
@@ -52,8 +52,7 @@ const convertLegacyData = async function (callback) {
       return {
         hostname: item,
         id: uniqueId(),
-        type: "Web page",
-        visibility: "visible",
+        isByPath: true,
       };
     });
 

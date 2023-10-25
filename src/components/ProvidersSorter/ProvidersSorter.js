@@ -13,9 +13,9 @@ const ProvidersSorter = (props) => {
   const [openItem, setOpenItem] = useState(null);
   const [providers, setProviders] = useState([]);
   const { alertHandler, AlertProvider } = useAlerts();
+  const areItems = providers.length > 0;
 
   const dispatchChrome = ChromeDispatcher;
-  const blockLists = sortablesFromProviders(providers);
 
   /** Get providers on first render */
   useChromeGet(
@@ -49,26 +49,18 @@ const ProvidersSorter = (props) => {
           direction={"column"}
         >
           {props.children}
-          {blockLists && (
-            <AlertsContext.Provider value={alertHandler}>
-              <ChromeContext.Provider value={{ providers, dispatchChrome }}>
-                <SortableSection
-                  openItem={openItem}
-                  setOpenItem={setOpenItem}
-                  id={"visible"}
-                  name={"Blocked domains"}
-                  list={blockLists.visible}
-                />
-                <SortableSection
-                  openItem={openItem}
-                  setOpenItem={setOpenItem}
-                  id={"hidden"}
-                  name={"Blocked pages"}
-                  list={blockLists.hidden}
-                />
-              </ChromeContext.Provider>
-            </AlertsContext.Provider>
-          )}
+
+          <AlertsContext.Provider value={alertHandler}>
+            <ChromeContext.Provider value={{ providers, dispatchChrome }}>
+              <SortableSection
+                openItem={openItem}
+                setOpenItem={setOpenItem}
+                id={"hidden"}
+                name={"Blocked pages"}
+                list={providers}
+              />
+            </ChromeContext.Provider>
+          </AlertsContext.Provider>
         </div>
       </div>
     </>

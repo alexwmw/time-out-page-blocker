@@ -9,23 +9,6 @@ const useAlerts = () => {
   let msgKey = 0;
 
   const alertHandler = {
-    invalidProviderError: ({ messages, onClick }) => {
-      setAlertData({
-        isOpen: true,
-        title: "Invalid form data",
-        children: (
-          <>
-            <p>Please address the following errors:</p>
-            <ul>
-              {messages.map((message) => (
-                <li key={msgKey++}>{message}</li>
-              ))}
-            </ul>
-          </>
-        ),
-        callback: onClick,
-      });
-    },
     confirm: ({ title, question, onProceed }) => {
       setConfirmData({
         isOpen: true,

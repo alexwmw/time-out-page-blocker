@@ -14,7 +14,7 @@ import animationSuccess from "./lotties/animation_lo5r2xoe.json";
 import { get, replaceObjectInArray, set } from "./modules/Utilities";
 
 const PageBlock = () => {
-  const [options, setOptions] = useGetOptions();
+  const [options] = useGetOptions();
   useApplyTheme(options, "dark");
   const queryParameters = new URLSearchParams(window.location.search);
   const id = queryParameters.get("id");
@@ -77,7 +77,6 @@ const PageBlock = () => {
           { ...provider, unblocked: true, lastUnblock: Date.now() },
           "id",
         );
-        console.log(arr);
         set({ providers: arr }, () => {
           setTimeout(
             () => window.location.assign(`http://${redirectAddress}`),
@@ -93,7 +92,7 @@ const PageBlock = () => {
       <img className={"bgImage"} src={bgSrc} />
       <Header />
       <div className={"content"}>
-        <h1>{redirectName}</h1>
+        <h1>{redirectAddress}</h1>
         <h2>This site is blocked</h2>
         <p>This page is being blocked by Time Out : Page Blocker.</p>
         <p>

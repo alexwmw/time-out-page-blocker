@@ -8,7 +8,7 @@ const TabContainer = ({ tabs, selectedTab, onTabSelect }) => {
     <Tab
       key={tab.id}
       id={`${tab.id}-tab`}
-      selected={selectedTab == tab}
+      selected={selectedTab === tab}
       onClick={() => onTabSelect(tab.id)}
       border={"left"}
     >
