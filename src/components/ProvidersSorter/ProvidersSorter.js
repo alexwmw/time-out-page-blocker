@@ -27,8 +27,8 @@ const ProvidersSorter = (props) => {
 
   const onStorageChange = (changes, namespace) => {
     if (
-      Object.keys(changes["providers"]?.newValue)?.length ||
-      Object.keys(changes["providers"]?.oldValue)?.length
+      Object.keys(changes["providers"]?.newValue ?? {})?.length ||
+      Object.keys(changes["providers"]?.oldValue ?? {})?.length
     ) {
       setProviders(changes["providers"]?.newValue);
     }

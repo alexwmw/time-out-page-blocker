@@ -1,10 +1,12 @@
-import { getAsync } from "../modules/Utilities";
+import { getAsync, sanitize } from "../modules/Utilities";
 
 (async function () {
   const { providers } = await getAsync("providers");
   const { options } = await getAsync("options");
   const hostname = window.location.hostname;
-  const url = window.location.href.split("://")[1];
+  const url = sanitize(window.location.href.split("://")[1]);
+
+  console.log(url);
 
   const matches = providers.filter(
     (provider) =>
@@ -14,7 +16,7 @@ import { getAsync } from "../modules/Utilities";
 
   const redirect = `chrome-extension://${
     chrome.runtime.id
-  }/page-block.html?redirect=${encodeURIComponent(url)}&id=${matches[0].id}`;
+  }/page-block.html?redirect=${encodeURIComponent(url)}&id=${matches[0]?.id}`;
 
   if (!matches[0] || matches[0].unblocked) {
     return;

@@ -64,6 +64,13 @@ export const replaceObjectInArray = (array, newObject, matchKey = "id") => {
   }
 };
 
+export const sanitize = (str) => {
+  if (str?.slice(-1) === "/") {
+    return str?.slice(0, -1);
+  }
+  return str;
+};
+
 /** Helper function */
 export const isValidURL = (url) => {
   let x = false;

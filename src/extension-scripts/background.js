@@ -8,7 +8,7 @@ const ext_options = require("../data/options.json");
 // const ext_matches = localizedProviders();
 
 const devConfig = {
-  setLegacyData: false,
+  setLegacyData: true,
   clearStoredData: false,
   clearStoredSyncData: false,
   clearStoredMatchData: false,
@@ -44,6 +44,15 @@ if (devConfig.setLegacyData) {
 } else {
   // Check data in storage
   get(defaults, (result) => {
+    if (Array.isArray(result.providers)) {
+      result.providers = result.providers.map((p) => {
+        return {
+          ...p,
+          unblocked: false,
+        };
+      });
+      console.log(result.providers);
+    }
     set(result, () => {
       sw_log("This object was set in storage:\n", result);
     });
@@ -54,7 +63,7 @@ chrome.runtime.onMessage.addListener(({ action, id }) => {
   const unblockProvider = async () => {
     let { providers } = await getAsync(["providers"]);
     const provider = providers.filter((p) => p.id === id)[0];
-    console.log({ onMessageProvider: provider });
+    sw_log("Unblocking provider", provider);
     providers = replaceObjectInArray(
       providers,
       {
@@ -70,6 +79,14 @@ chrome.runtime.onMessage.addListener(({ action, id }) => {
     get(["options"], ({ options }) => {
       const allowRevisits = options.allowRevisits.value;
       const time = !allowRevisits ? 1000 : options.revisitLimit.value * 60000;
+      let t = time;
+      sw_log(
+        "Setting unblock timeout for provider",
+        id,
+        "in",
+        time / 1000,
+        "seconds",
+      );
       setTimeout(unblockProvider, time);
     });
   }
@@ -79,9 +96,16 @@ chrome.runtime.onStartup.addListener(() => {
   (async function () {
     let { providers } = getAsync([providers]);
     if (Array.isArray(providers)) {
-      providers = providers.map((p) => (p.unblocked = false));
+      providers = providers.map((p) => {
+        return {
+          ...p,
+          unblocked: false,
+        };
+      });
       set({ providers });
     }
   })();
 });
-convertLegacyData();
+convertLegacyData((obj) => {
+  sw_log("Legacy data was converted to", obj);
+});

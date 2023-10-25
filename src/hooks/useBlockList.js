@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { createUniqueId, get, set } from "../modules/Utilities";
+import { createUniqueId, get, sanitize, set } from "../modules/Utilities";
 
 const useBlockList = (currentTab, blockDomain) => {
   const [protocol, url] = currentTab?.url?.split(`//`) ?? [];
   const isValidSite = ["http:", "https:"].some(
     (prt) => prt === protocol?.toLowerCase(),
   );
-  const domain = url?.split("/")[0];
+  const domain = sanitize(url?.split("/")[0]);
   const [isBlockedSite, setIsBlockedSite] = useState(false);
+
+  console.log(url);
 
   useEffect(() => {
     get(["providers"], ({ providers }) => {
@@ -20,14 +22,17 @@ const useBlockList = (currentTab, blockDomain) => {
       const uniqueId = createUniqueId();
       const obj = {
         id: uniqueId,
-        hostname: blockDomain ? domain : url,
+        hostname: blockDomain ? domain : sanitize(url),
         type: blockDomain ? "Domain" : "Web page",
       };
-      if (providers?.some((item) => item.hostname === obj.hostname)) {
-        alert("Site is already on block list!");
+      const matches = providers.filter(
+        (item) => item.hostname === obj.hostname,
+      );
+      if (matches.length === 0) {
+        set({ providers: [...providers, obj] });
         return;
       }
-      set({ providers: [...providers, obj] });
+      alert("Site is already on block list!");
     });
   };
 
@@ -38,7 +43,7 @@ const useBlockList = (currentTab, blockDomain) => {
           return !item.hostname === domain;
         }
         if (item.type === "Web page" || item.type === "Webpage") {
-          return !item.hostname === url;
+          return !item.hostname === sanitize(url) || !item.hostname === url;
         }
         throw Error("Unknown blockList item type");
       });
@@ -51,7 +56,7 @@ const useBlockList = (currentTab, blockDomain) => {
       newValue?.some((item) => {
         return (
           (item.type === "Domain" && item.hostname === domain) ||
-          (item.type === "Web page" && item.hostname === url)
+          item.hostname === sanitize(url)
         );
       }),
     );

@@ -1,7 +1,7 @@
 import { createUniqueId, getAsync, set } from "../modules/Utilities";
 
-const convertLegacyData = async function () {
-  const uniqueId = createUniqueId();
+const convertLegacyData = async function (callback) {
+  const uniqueId = () => createUniqueId();
   const local = await chrome.storage.local.get();
   const sync = await getAsync(["options", "providers"]);
   if (Object.keys(local).length) {
@@ -51,13 +51,17 @@ const convertLegacyData = async function () {
     const providers = matches.split("\n").map((item) => {
       return {
         hostname: item,
-        id: uniqueId,
-        type: "Website",
+        id: uniqueId(),
+        type: "Web page",
         visibility: "visible",
       };
     });
 
     set({
+      options: { ...sync.options },
+      providers: providers,
+    });
+    callback({
       options: { ...sync.options },
       providers: providers,
     });

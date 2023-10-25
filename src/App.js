@@ -11,7 +11,7 @@ import "./components/Inputs/Switch.less";
 import Button from "./components/Buttons/Button";
 import Icon from "./components/Icons/Icon";
 import useGetCurrentTab from "./hooks/useGetCurrentTab";
-import useBlockList from "./hooks/useBlockListData";
+import useBlockList from "./hooks/useBlockList";
 import {Favicon} from "./components/ProvidersSorter/SortableItem";
 import useGetOptionValue from "./hooks/useGetOptionValue";
 
@@ -35,6 +35,9 @@ const App = () => {
 
   const handleCheckboxChange = (e) => {
     setIsBlockDomain(e.target.checked);
+  };
+  const refreshTab = () => {
+    chrome.tabs.reload(currentTab.id);
   };
 
   const currentUrl = (currentTab?.url?.split(`//`) ?? [])[1]?.split("/")[0];
@@ -88,7 +91,7 @@ const App = () => {
                     Manage block list
                   </Button>
                 )}
-                {added && <Button onClick={() => {}}>Refresh site</Button>}
+                {added && <Button onClick={refreshTab}>Refresh site</Button>}
               </>
             )}
             {!isBlockedSite && (
