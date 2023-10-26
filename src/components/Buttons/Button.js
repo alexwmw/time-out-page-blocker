@@ -2,23 +2,9 @@ import clsx from "clsx";
 import Icon from "../Icons/Icon";
 import "./Button.less";
 
-function Button({
-  icon,
-  children,
-  onClick,
-  onMouseDown,
-  classes,
-  type,
-  disabled,
-}) {
+function Button({ icon, children, classes, tabIndex, ...rest }) {
   return (
-    <button
-      disabled={disabled}
-      type={type}
-      onClick={onClick}
-      onMouseDown={onMouseDown}
-      className={clsx("button", classes)}
-    >
+    <button {...rest} tabIndex={tabIndex} className={clsx("button", classes)}>
       {icon && <Icon type={icon} />}
       {children}
     </button>

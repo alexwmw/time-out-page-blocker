@@ -171,30 +171,23 @@ li.sortable-item {
     width: fit-content;
     gap: 10px;
     position: relative;
-    left: -7px;
+    left: -2px;
+    bottom: 2px;
     cursor: pointer;
-
     align-items: center;
 
-    .switch {
-      transform: scale(0.8);
+    padding: 3px 6px 3px 3px;
+    user-select: none;
 
-      input:checked + .handle {
-        outline-color: @Success;
-      }
-
-      input:checked + .handle:before {
-        background-color: @Success;
-      }
-
-      input:checked + .handle {
-        background-color: var(--L4);
+    &:hover {
+      .checkbox {
+        background-color: @InfoLight;
       }
     }
 
 
     &:not(.by-path) span {
-      color: var(--L1);
+      color: var(--L0);
     }
 
     &.by-path span {

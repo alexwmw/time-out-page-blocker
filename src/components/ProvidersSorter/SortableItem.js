@@ -1,12 +1,11 @@
 import clsx from "clsx";
-import ProviderForm from "../Forms/ProviderForm";
 import IconTrigger from "../Icons/IconTrigger";
 import "./SortableItem.less";
 import Img from "../Images/Img";
-import useExpanded from "../../hooks/useExpanded";
 import { useContext, useEffect, useState } from "react";
 import ChromeContext from "../../contexts/ChromeContext";
 import AlertsContext from "../../contexts/AlertsContext";
+import Icon from "../Icons/Icon";
 
 export const Favicon = ({ url, provider, className }) => {
   const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain_url=${
@@ -68,26 +67,18 @@ function SortableItem({ provider, openItem, setOpenItem }) {
             onClick={deleteHandler}
             type={"delete"}
           />
-
-          {/*<IconTrigger*/}
-          {/*  className={clsx(*/}
-          {/*    "li-btn",*/}
-          {/*    isScheduled ? "on" : "off",*/}
-          {/*    isExpanded && "expanded",*/}
-          {/*  )}*/}
-          {/*  onClick={toggleExpanded}*/}
-          {/*  type={!isExpanded ? "edit" : "collapse"}*/}
-          {/*/>*/}
         </div>
       </div>
       <label className={clsx("switch-row", isByPath && "by-path")}>
-        <label className={"switch"}>
+        <label className={"checkbox"}>
           <input
             checked={isByPath}
             onChange={handleTogglePath}
             type={"checkbox"}
           />
-          <div className={"handle"} />
+          <div className={"handle"}>
+            <Icon icon={"check"} />
+          </div>
         </label>
         <span>Block subpages</span>
       </label>

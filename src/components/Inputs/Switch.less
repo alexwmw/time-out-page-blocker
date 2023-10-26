@@ -1,6 +1,6 @@
 @import "/src/less/_variables.less";
 
-@transition_time: 250ms;
+@transition_time: 200ms;
 
 /* The switch - the box around the slider */
 .switch {
@@ -161,5 +161,48 @@
       border-color: var(--P1);
       outline: solid 1px var(--P1);
     }
+  }
+}
+
+
+.checkbox {
+  height: 14px;
+  width: 14px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--L2);
+  cursor: pointer;
+  display: flex;
+  background-color: transparent;
+  transition: @transition_time all ease;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    + .handle {
+      flex: 1;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        display: none;
+        color: white;
+        scale: 0.75;
+      }
+    }
+
+    &:checked + .handle {
+      background-color: @Info;
+
+      svg {
+        display: block;
+      }
+    }
+
   }
 }

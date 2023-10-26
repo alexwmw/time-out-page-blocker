@@ -27,32 +27,34 @@ const convertLegacyData = async function (callback) {
     sync.options.activeDays.value = sync.options.activeDays.value.map(
       (item, index) => ({
         ...item,
-        value: days[index],
+        value: days[index] ?? false,
       }),
     );
     sync.options.activeTimes.value = {
       allDay: {
         ...sync.options.activeTimes.value.allDay,
-        value: allDayCheckbox,
+        value: allDayCheckbox ?? false,
       },
       end: {
         ...sync.options.activeTimes.value.end,
-        value: endTime,
+        value: endTime ?? false,
       },
       start: {
         ...sync.options.activeTimes.value.start,
-        value: startTime,
+        value: startTime ?? false,
       },
     };
-    sync.options.allowRevisits.value = revisitsCheckbox;
-    sync.options.unblockTimeout.value = seconds;
-    sync.options.revisitLimit.value = revisitsNumber;
+    sync.options.allowRevisits.value = revisitsCheckbox ?? false;
+    sync.options.unblockTimeout.value = seconds ?? false;
+    sync.options.revisitLimit.value = revisitsNumber ?? false;
+    sync.options.scheduleBlocking.value = true;
 
     const providers = matches.split("\n").map((item) => {
       return {
         hostname: item,
         id: uniqueId(),
         isByPath: true,
+        dateAdded: new Date(Date.now()).toLocaleString(),
       };
     });
 

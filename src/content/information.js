@@ -13,44 +13,45 @@ import { version } from "../manifest.json";
 const information = [
   `
   ### Version ${version}
-  ### Search provider settings
-  You can edit the settings of each search provider by clicking on the **⋮ more** icons on the **search providers** tab. The requirements for each form field are:\n\n
-  <div>
-  #### Provider ID
-  A unique ID for the search provider.
-  #### Hostname
-  The website to be searched. Usually this will be everything between and including 'www' and '.com'. Examples include: www.example.com, site.example.org, example.de
-  #### Query path
-  The URL string (after the slash '/') which determines the path to the search results page, including a placeholder $TEXT$ for the search term. \n\n
-  The query path of a URL will often be made up of multiple key/value pairs joined by '&'. You should try to ensure the string entered here only includes the necessary key/value pairs. \n\n
-  For example, 'search?q=$TEXT$&page=1' can be shortened to 'search?q=$TEXT$'
-  #### Favicon URL (optional)
-  The URL of the website's favicon (icon). If left blank, the default favicon URL '<span>https</span>://[hostname]/favicon.ico' will be used.
-  </div>
+  ### Description
+  
+  **Time Out : Page Blocker** is a Chrome extension and productivity tool, designed to help you stay focussed.
+
+  **Time Out** blocks websites of your choosing, enabling you to use your internet browser productively without getting distracted by troublesome websites. 
+  
+  However, unlike other website blockers that make it impossible for you to reach the blocked website, **Time Out** will prompt you to hold down a button for a set time if you decide you really did want to visit the page.
+  
+  This has the advantage of giving you the user the choice of whether you want to complete a visit to the site in any given moment, while also giving you time to pause and think. 
+  
+  This 'optional' method is an advantage over other website blocker that blanket-ban web pages, which can get frustrating and result in the user disabling the extension altogether.
+  
+  ### Add to blocked list
+  
+  There are two ways to add sites to the block list:
+  
+  1. Via the extension popup, which can be opened by clicking the extension icon in the Chrome toolbar
+  2. Via context menus which can usually be accessed by right-clicking on a webpage
+  
+  
+  
+  
+
   `,
   `
-  ### Adding a new search provider
-  You can  add your own custom search providers by clicking the Add New Provider button. \n\n
-  The easiest way to add your own search provider is to use the auto-fill function by following the instructions in the new provider form. \n\n
-  Alternatively, follow these instructions. \n\n
-  Using 'bbc.co.uk' as an example:\n\n
-  - Go to www.bbc.co.uk
-  - Locate the search box and type a specific word such as 'text'
-  - On the search results page, take note of the page's URL; e.g., '<span>https</span>://www.bbc.co.uk/search?q=text&page=1'. Then, fill in the details in the new provider form as follows:
-      - Provider name: BBC
-      - Hostname: www.bbc.co.uk
-      - Query path: search?q=$TEXT$ (replacing whatever word you searched for with the placeholder '$TEXT$', and dropping anything after that starts with '&')
-      - Favicon URL: leave blank or set a specific URL if you have one
-  `,
-  `
-  ### Opening a search in the background
-  It is possible to open searches in a background tab so as not to interrupt your browsing experience. \n\nYou can do so by pressing and holding the **${modKey(
-    navigator.userAgent,
-  )} key** when clicking on the search icon; or if you have a mouse, clicking the icon using the scroll wheel/middle button. (This functionality is the same for all hyperlinks in Chrome.)
-  `,
-  `
-  ### The 'go-to' function
-  Every time you highlight text on a web page, the extension will try to determine if the text you have selected is a valid website URL.\n\nIf the selected text has the form of a URL or hostname (e.g., www.example.com, site.example.org, etc.), a **go-to icon** will appear as the first icon in the popup.\n\nClick the go-to icon to follow the link. This saves you from having to copy/paste the URL into your search bar in order to reach the website. 
+  Only pages which start with **http://** or **https://** can be blocked. You may need to double click the URL bar to see this.
+  
+  When adding a page to the block list, you can chose to either block via the root domain (usually the bit that ends in **.com**), or the full web address.
+  
+  By default, any subpage which starts with a blocked address will also be blocked. This can be toggled on or off in the **block list** tab.
+  
+  ### Visiting a blocked site
+  
+  If you try to visit a site on your block list, you will be redirected to the **Time Out** page, where you will be required to hold a button to view the page. The length of time you are required to hold the button can be edited under the **settings** tab.
+  
+  Once you have unblocked a site, you will be free to view it for a few minutes - provided you have allowed this in **settings**.
+  
+  If you have have turned on **scheduling**, sites will only be blocked during scheduled hours.
+  
   `,
 ];
 

@@ -4,7 +4,6 @@ import SortableSection from "./SortableSection";
 import ChromeContext from "../../contexts/ChromeContext";
 import ChromeDispatcher from "../../modules/ChromeDispatcher";
 import useChromeGet from "../../hooks/useChromeGet";
-import { sortablesFromProviders } from "../../modules/Utilities";
 import AlertsContext from "../../contexts/AlertsContext";
 import useAlerts from "../../hooks/useAlerts";
 

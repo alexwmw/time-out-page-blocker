@@ -17,7 +17,7 @@
     "id": "unblockTimeout",
     "label": "Time-out button hold duration",
     "description": "Number of seconds required when holding the unlock button",
-    "value": "5",
+    "value": "20",
     "type": "number",
     "unit": "sec",
     "min": 3,
@@ -31,7 +31,7 @@
     "label": "Allow scheduling",
     "description": "Only block sites during certain days and hours",
     "type": "switch",
-    "value": true,
+    "value": false,
     "pos": 0
   },
   "activeDays": {
@@ -110,7 +110,7 @@
     "id": "revisitLimit",
     "label": "Re-visit time limit",
     "description": "Time frame during which visits to blocked sites will be allowed after unblocking",
-    "value": 1,
+    "value": 3,
     "min": 1,
     "max": 999,
     "type": "number",

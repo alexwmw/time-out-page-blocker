@@ -8,9 +8,9 @@ import { getAsync, getBlockPredicates, sanitize } from "../modules/Utilities";
     getBlockPredicates(options);
 
   const matches = providers.filter((provider) => {
-    console.log(url, <provider className="hostname"></provider>);
+    console.log(url, provider.hostname);
     return (
-      (provider.isByPath && url.startsWith(provider.hostname)) ||
+      (provider.isByPath && url?.startsWith(provider.hostname)) ||
       provider.hostname === url
     );
   });

@@ -41,7 +41,6 @@ module.exports = {
         { from: path.resolve(__dirname, "src/css"), to: "css" },
         { from: path.resolve(__dirname, "src/icons"), to: "icons" },
         { from: path.resolve(__dirname, "src/images"), to: "images" },
-        { from: path.resolve(__dirname, "src/_locales"), to: "_locales" },
       ],
     }),
   ],

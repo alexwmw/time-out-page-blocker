@@ -34,8 +34,30 @@
 
     h1 {
       font-size: 28px;
+      width: 450px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
     }
 
+    p.url {
+      width: 450px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--P2);
+      margin-top: 0;
+
+      span:first-child {
+        font-weight: 700;
+        color: @text-color
+      }
+
+
+    }
   }
 
   .hold-button-container {

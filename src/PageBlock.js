@@ -7,7 +7,6 @@ import useApplyTheme from "./hooks/useApplyTheme";
 import Button from "./components/Buttons/Button";
 import { useEffect, useRef, useState } from "react";
 import useGetProvider from "./hooks/useGetProvider";
-import bgSrc from "./images/abstract6.jpg";
 import Lottie from "react-lottie";
 import animationData from "./lotties/animation_lo5im3zy.json";
 import animationSuccess from "./lotties/animation_lo5r2xoe.json";
@@ -39,7 +38,8 @@ const PageBlock = () => {
   };
 
   const onMouseDown = (e) => {
-    if (e.button === 0) {
+    const spacerBarPress = e.key === " " || e.code === "Space";
+    if (e.button === 0 || (spacerBarPress && !held)) {
       player.current.play();
       setHeld(true);
       interval.current = setInterval(() => {
@@ -66,22 +66,34 @@ const PageBlock = () => {
 
   useEffect(() => {
     document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("keyup", onMouseUp);
   }, [onMouseUp]);
 
   useEffect(() => {
     if (complete) {
-      chrome.runtime.sendMessage({ action: "unblock", id });
-      get(["providers"], ({ providers }) => {
-        const arr = replaceObjectInArray(
-          providers,
-          { ...provider, unblocked: true, lastUnblock: Date.now() },
-          "id",
-        );
-        set({ providers: arr }, () => {
-          setTimeout(
-            () => window.location.assign(`http://${redirectAddress}`),
-            1000,
+      chrome.runtime.sendMessage({ action: "unblock", id }, () => {
+        get(["providers"], ({ providers }) => {
+          const arr = replaceObjectInArray(
+            providers,
+            {
+              ...provider,
+              unblocked: true,
+              lastUnblock: new Date(Date.now()).toLocaleString(),
+            },
+            "id",
           );
+          set({ providers: arr }, () => {
+            chrome.runtime.sendMessage({
+              log: [
+                "page block: unblock set on provider. Redirecting.",
+                provider,
+              ],
+            });
+            setTimeout(
+              () => window.location.assign(`http://${redirectAddress}`),
+              1000,
+            );
+          });
         });
       });
     }
@@ -89,10 +101,13 @@ const PageBlock = () => {
 
   return (
     <>
-      <img className={"bgImage"} src={bgSrc} />
+      {/*<img className={"bgImage"} src={bgSrc} />*/}
       <Header />
       <div className={"content"}>
-        <h1>{redirectAddress}</h1>
+        <h1>{provider.hostname}</h1>
+        {redirectAddress !== provider.hostname && (
+          <p className={"url"}>{redirectAddress}</p>
+        )}
         <h2>This site is blocked</h2>
         <p>This page is being blocked by Time Out : Page Blocker.</p>
         <p>
@@ -109,7 +124,12 @@ const PageBlock = () => {
                 speed={lottieSpeed}
               />
 
-              <Button onMouseDown={onMouseDown} classes={"hold-button"}>
+              <Button
+                onKeyDown={onMouseDown}
+                onMouseDown={onMouseDown}
+                classes={"hold-button"}
+                tabIndex={1}
+              >
                 {held ? remainingTime : "Hold"}
               </Button>
             </div>

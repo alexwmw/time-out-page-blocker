@@ -22,6 +22,7 @@ const useBlockList = (currentTab, isByPath) => {
         id: uniqueId,
         hostname: sanitize(url),
         isByPath,
+        dateAdded: new Date(Date.now()).toLocaleString(),
       };
       const matches = providers.filter(
         (item) => item.hostname === obj.hostname,
@@ -40,6 +41,7 @@ const useBlockList = (currentTab, isByPath) => {
         id: uniqueId,
         hostname: domain,
         isByPath,
+        dateAdded: new Date(Date.now()).toLocaleString(),
       };
       const matches = providers.filter(
         (item) => item.hostname === obj.hostname,
@@ -57,7 +59,7 @@ const useBlockList = (currentTab, isByPath) => {
       newValue?.some((item) => {
         console.log({ ...item, url });
         return (
-          (item.isByPath && url.startsWith(item.hostname)) ||
+          (item.isByPath && url?.startsWith(item.hostname)) ||
           item.hostname === sanitize(url)
         );
       }),
