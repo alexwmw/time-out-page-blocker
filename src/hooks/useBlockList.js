@@ -9,7 +9,7 @@ export const getBlockListAdders = (url) => {
       const obj = {
         id: uniqueId,
         hostname: sanitize(url),
-        isByPath,
+        isByPath: true,
         dateAdded: new Date(Date.now()).toLocaleString(),
       };
       const matches = providers.filter(

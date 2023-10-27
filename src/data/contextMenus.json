@@ -8,14 +8,14 @@
     ]
   },
   {
-    "id": "addPageToBlockList",
-    "title": "Add this page to block list",
+    "id": "addDomainToBlockList",
+    "title": "Add this domain to block list",
     "parentId": "pageBlock",
     "visible": true
   },
   {
-    "id": "addDomainToBlockList",
-    "title": "Add this domain to block list",
+    "id": "addPageToBlockList",
+    "title": "Add this page to block list",
     "parentId": "pageBlock",
     "visible": true
   },

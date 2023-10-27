@@ -71,6 +71,10 @@ const App = () => {
   const currentPage = sanitize((currentTab?.url?.split(`//`) ?? [])[1]);
   const currentDomain = (currentTab?.url?.split(`//`) ?? [])[1]?.split("/")[0];
 
+  const notInTime =
+    predicates?.isScheduled &&
+    (!predicates?.isBlockingDay || !predicates?.isBlockingTime);
+
   return (
     <div className={clsx("app", "flex-container", "column")}>
       <Header>
@@ -94,11 +98,13 @@ const App = () => {
                   : "This page is on your block list"}
               </h1>
               {!added && (
-                <Button onClick={() => chrome.runtime.openOptionsPage()}>
+                <Button onClick={() => window.open("options.html")}>
                   Manage block list
                 </Button>
               )}
-              {added && <Button onClick={refreshTab}>Refresh site</Button>}
+              {added && !notInTime && (
+                <Button onClick={refreshTab}>Refresh site</Button>
+              )}
             </>
           )}
           {!isBlockedSite && (

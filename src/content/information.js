@@ -8,11 +8,11 @@ const modKey = (userAgentStr) => {
   }
 };
 
-import { version } from "../manifest.json";
+import manifest from "../manifest.json";
 
 const information = [
   `
-  ### Version ${version}
+  ### Version ${manifest.version}
   ### Description
   
   **Time Out : Page Blocker** is a Chrome extension and productivity tool, designed to help you stay focussed.
@@ -21,9 +21,9 @@ const information = [
   
   However, unlike other website blockers that make it impossible for you to reach the blocked website, **Time Out** will prompt you to hold down a button for a set time if you decide you really did want to visit the page.
   
-  This has the advantage of giving you the user the choice of whether you want to complete a visit to the site in any given moment, while also giving you time to pause and think. 
+  This gives you the choice of whether you want to complete a visit to the site in any given moment, while also giving you time to pause and think. 
   
-  This 'optional' method is an advantage over other website blocker that blanket-ban web pages, which can get frustrating and result in the user disabling the extension altogether.
+  This is an advantage over other website blocker that always block web pages, which can get frustrating and result in the user disabling the extension altogether.
   
   ### Add to blocked list
   
@@ -31,11 +31,6 @@ const information = [
   
   1. Via the extension popup, which can be opened by clicking the extension icon in the Chrome toolbar
   2. Via context menus which can usually be accessed by right-clicking on a webpage
-  
-  
-  
-  
-
   `,
   `
   Only pages which start with **http://** or **https://** can be blocked. You may need to double click the URL bar to see this.
