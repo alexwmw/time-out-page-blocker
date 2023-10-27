@@ -2,7 +2,7 @@
 
 ## Logo
 
-<img src="/images/icon_lockup.png" width="500">
+<img src="src/icons/icon512.png" width="220">
 
 ## Link
 
