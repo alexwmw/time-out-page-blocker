@@ -30,6 +30,6 @@ user disabling the extension altogether.
 
 ## Screenshots
 
-<img src="/screenshots/Screenshot 1.png" width="1000">
-<img src="/screenshots/Screenshot 2.png" width="1000">
-<img src="/screenshots/Screenshot 3.png" width="1000">
+<img src="/screenshots/screenshot1.png" width="1000">
+<img src="/screenshots/screenshot2.png" width="1000">
+<img src="/screenshots/screenshot3.png" width="1000">
