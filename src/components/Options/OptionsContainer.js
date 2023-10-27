@@ -4,7 +4,6 @@ import information from "../../content/information.js";
 import MarkdownMapper from "../Markdown/MarkdownMapper";
 import ProvidersSorter from "../ProvidersSorter/ProvidersSorter";
 import "./OptionsContainer.less";
-import HelpIcon from "../Tooltips/HelpIcon";
 
 function OptionsContainer(props) {
   const isInfoTab = props.selectedTab === props.tabs.info;
@@ -13,16 +12,11 @@ function OptionsContainer(props) {
 
   return (
     <div className={clsx("flex-container", "page", "options-container")}>
-      <div
-        className={clsx(
-          "flex-container",
-          "row",
-          "center",
-          "options-title-area",
-        )}
-      >
+      <div className={clsx("options-title-area")}>
         <h2>{props.selectedTab.nameLong ?? props.selectedTab.name} </h2>
-        {isSearchTab && <HelpIcon />}
+        {props.selectedTab.description && (
+          <p>{props.selectedTab.description}</p>
+        )}
       </div>
       <div
         className={clsx("flex-container", "page", "options-container-inner")}

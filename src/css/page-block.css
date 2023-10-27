@@ -1,6 +1,7 @@
 html {
     height: 100vh;
     font-size: 18px;
+    overflow: hidden;
 }
 
 body {

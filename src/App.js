@@ -13,28 +13,7 @@ import Icon from "./components/Icons/Icon";
 import useGetCurrentTab from "./hooks/useGetCurrentTab";
 import useBlockList from "./hooks/useBlockList";
 import { Favicon } from "./components/ProvidersSorter/SortableItem";
-import useGetOptionValue from "./hooks/useGetOptionValue";
 import useGetPredicates from "./hooks/useGetPredicates";
-
-const ToggleRow = ({ isBlockDomain, handleCheckboxChange }) => {
-  return (
-    <div className={"toggle-row"}>
-      <span>Block by:</span>
-      <span>
-        <p>Page</p>
-        <label className={"switch"}>
-          <input
-            type={"checkbox"}
-            checked={isBlockDomain ?? false}
-            onChange={handleCheckboxChange}
-          />
-          <span className="handle notBool"></span>
-        </label>
-        <p>Domain</p>
-      </span>
-    </div>
-  );
-};
 
 const NotValidSiteContent = () => {
   return (
@@ -43,7 +22,7 @@ const NotValidSiteContent = () => {
         <Icon type={"stop"} />
         This page cannot be blocked
       </h1>
-      <Button onClick={() => window.open("options.html")}>
+      <Button onClick={() => chrome.runtime.openOptionsPage()}>
         Go to settings
       </Button>
     </div>
@@ -78,19 +57,14 @@ const App = () => {
   const [currentTab, setCurrentTab] = useState({});
   useGetCurrentTab(setCurrentTab);
   const [added, setAdded] = useState(false);
-  const [isByPath, setIsBlockDomain] = useGetOptionValue(
-    "blockDomainByDefault",
-  );
   const predicates = useGetPredicates();
   const {
     isValidSite,
     isBlockedSite,
     addPageToBlockList,
     addDomainToBlockList,
-  } = useBlockList(currentTab, isByPath);
-  const handleCheckboxChange = (e) => {
-    setIsBlockDomain(e.target.checked);
-  };
+  } = useBlockList(currentTab);
+
   const refreshTab = () => {
     chrome.tabs.reload(currentTab.id);
   };
@@ -120,7 +94,7 @@ const App = () => {
                   : "This page is on your block list"}
               </h1>
               {!added && (
-                <Button onClick={() => window.open("options.html")}>
+                <Button onClick={() => chrome.runtime.openOptionsPage()}>
                   Manage block list
                 </Button>
               )}

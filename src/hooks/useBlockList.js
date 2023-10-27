@@ -1,21 +1,9 @@
 import { useEffect, useState } from "react";
 import { createUniqueId, get, sanitize, set } from "../modules/Utilities";
 
-const useBlockList = (currentTab, isByPath) => {
-  const [protocol, url] = currentTab?.url?.split(`//`) ?? [];
-  const isValidSite = ["http:", "https:"].some(
-    (prt) => prt === protocol?.toLowerCase(),
-  );
+export const getBlockListAdders = (url) => {
   const domain = sanitize(url?.split("/")[0]);
-  const [isBlockedSite, setIsBlockedSite] = useState(false);
-
-  useEffect(() => {
-    get(["providers"], ({ providers }) => {
-      onBlockListChange({ newValue: providers });
-    });
-  }, [domain, url]);
-
-  const addPageToBlockList = () => {
+  const addPageToBlockList = (callback) => {
     get(["providers"], ({ providers }) => {
       const uniqueId = createUniqueId();
       const obj = {
@@ -29,18 +17,19 @@ const useBlockList = (currentTab, isByPath) => {
       );
       if (matches.length === 0) {
         set({ providers: [...providers, obj] });
+        callback();
         return;
       }
       alert("Site is already on block list!");
     });
   };
-  const addDomainToBlockList = () => {
+  const addDomainToBlockList = (callback) => {
     get(["providers"], ({ providers }) => {
       const uniqueId = createUniqueId();
       const obj = {
         id: uniqueId,
         hostname: domain,
-        isByPath,
+        isByPath: true,
         dateAdded: new Date(Date.now()).toLocaleString(),
       };
       const matches = providers.filter(
@@ -48,11 +37,31 @@ const useBlockList = (currentTab, isByPath) => {
       );
       if (matches.length === 0) {
         set({ providers: [...providers, obj] });
+        callback();
         return;
       }
       alert("Site is already on block list!");
     });
   };
+
+  return { addPageToBlockList, addDomainToBlockList };
+};
+
+const useBlockList = (currentTab) => {
+  const [protocol, url] = currentTab?.url?.split(`//`) ?? [];
+  const isValidSite = ["http:", "https:"].some(
+    (prt) => prt === protocol?.toLowerCase(),
+  );
+
+  const [isBlockedSite, setIsBlockedSite] = useState(false);
+
+  const { addPageToBlockList, addDomainToBlockList } = getBlockListAdders(url);
+
+  useEffect(() => {
+    get(["providers"], ({ providers }) => {
+      onBlockListChange({ newValue: providers });
+    });
+  }, [url]);
 
   function onBlockListChange({ newValue }) {
     setIsBlockedSite(
@@ -66,7 +75,7 @@ const useBlockList = (currentTab, isByPath) => {
     );
   }
 
-  const onStorageChange = (changes, namespace) => {
+  const onStorageChange = (changes) => {
     if (
       Object.keys(changes["providers"]?.newValue ?? {})?.length ||
       Object.keys(changes["providers"]?.oldValue ?? {})?.length
@@ -76,11 +85,11 @@ const useBlockList = (currentTab, isByPath) => {
   };
 
   useEffect(() => {
-    if (domain && url) {
+    if (url) {
       chrome.storage.onChanged.removeListener(onStorageChange);
       chrome.storage.onChanged.addListener(onStorageChange);
     }
-  }, [domain, url]);
+  }, [url]);
 
   return {
     isValidSite,

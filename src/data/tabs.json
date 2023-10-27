@@ -3,6 +3,7 @@
     "id": "search",
     "name": "Block list",
     "nameLong": "Manage block list",
+    "description": "Delete items from your block list and manage blocking of subpages",
     "icon": "block",
     "isOptionsTab": false
   },

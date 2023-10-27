@@ -45,6 +45,7 @@ export const createUniqueId = () => "id" + Math.random().toString(16).slice(2);
 export const set = (obj, callback) => {
   chrome.storage.sync.set(obj, callback);
 };
+export const setAsync = async (obj) => chrome.storage.sync.set(obj);
 
 export const get = (keys, callback) => chrome.storage.sync.get(keys, callback);
 

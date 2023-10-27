@@ -3,7 +3,7 @@ import SortableItem from "./SortableItem";
 import "./SortableSection.less";
 
 function SortableSection(props) {
-  const { name, id, list, openItem, setOpenItem } = props;
+  const { id, list, openItem, setOpenItem } = props;
 
   return (
     <div className={clsx("sortable-section", list.length === 0 && "empty")}>

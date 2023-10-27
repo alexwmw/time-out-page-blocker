@@ -1,0 +1,28 @@
+[
+  {
+    "id": "pageBlock",
+    "title": "Time Out : Page Blocker",
+    "documentUrlPatterns": [
+      "https://*/*",
+      "http://*/*"
+    ]
+  },
+  {
+    "id": "addPageToBlockList",
+    "title": "Add this page to block list",
+    "parentId": "pageBlock",
+    "visible": true
+  },
+  {
+    "id": "addDomainToBlockList",
+    "title": "Add this domain to block list",
+    "parentId": "pageBlock",
+    "visible": true
+  },
+  {
+    "id": "manageBlockList",
+    "title": "Manage block list",
+    "parentId": "pageBlock",
+    "visible": true
+  }
+]

@@ -16,6 +16,39 @@
     background-color: #41516255;
     backdrop-filter: blur(3px);
     border-bottom: none;
+
+  }
+
+  .rate-me {
+    background-color: var(--bg);
+    margin: 8px 8px 8px auto;
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 3px var(--A1);
+
+
+    h1, h2, h3 {
+      margin-block: 10px;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 3px
+    }
+
+    img {
+      height: 18px;
+      width: 18px;
+      align-self: self-start;
+    }
+
+  }
+
+  &:has(.rate-me) {
+    .content {
+      margin-top: 10px;
+    }
   }
 
 

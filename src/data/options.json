@@ -118,13 +118,7 @@
     "pos": 5,
     "parentId": "allowRevisits"
   },
-  "blockDomainByDefault": {
-    "class": "settings",
-    "id": "blockDomainByDefault",
-    "label": "Block domains by default",
-    "description": "Block every website on the same domain whe adding to block list, unless otherwise specified",
-    "type": "switch",
-    "pos": 6,
-    "value": true
+  "isRated": {
+    "value": false
   }
 }
