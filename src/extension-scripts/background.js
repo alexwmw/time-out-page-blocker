@@ -22,9 +22,12 @@ const defaults = {
   options: ext_options,
 };
 
-contextMenuItems.forEach((item) => {
-  chrome.contextMenus.create(item);
-});
+const createContextMenus = () =>
+  contextMenuItems.forEach((item) => {
+    chrome.contextMenus.create(item);
+  });
+
+chrome.runtime.onInstalled.addListener(createContextMenus);
 chrome.contextMenus.onClicked.addListener(contextMenuListener);
 chrome.runtime.onMessage.addListener(runtimeMessageListener);
 chrome.runtime.onStartup.addListener(runtimeStartupListener);

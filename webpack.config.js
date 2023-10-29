@@ -12,7 +12,6 @@ module.exports = {
     app: "./src/App.js",
     "page-block": "./src/PageBlock.js",
   },
-  devtool: "inline-source-map",
   devServer: {
     contentBase: "./dist",
   },
