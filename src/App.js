@@ -17,13 +17,13 @@ import useGetPredicates from "./hooks/useGetPredicates";
 
 const NotValidSiteContent = () => {
   return (
-    <div className={clsx("button-container")}>
+    <div className={clsx("button-container no-block")}>
       <h1>
         <Icon type={"stop"} />
         This page cannot be blocked
       </h1>
       <Button onClick={() => chrome.runtime.openOptionsPage()}>
-        Go to settings
+        Go to options
       </Button>
     </div>
   );
@@ -131,9 +131,12 @@ const App = () => {
               >
                 <span>Block {currentDomain}</span>
               </Button>
-              <a target="_blank" href={"options.html"}>
-                Manage block list
-              </a>
+              <Button
+                classes={"secondary"}
+                onClick={() => window.open("options.html")}
+              >
+                <span>Manage block list</span>
+              </Button>
             </>
           )}
         </div>

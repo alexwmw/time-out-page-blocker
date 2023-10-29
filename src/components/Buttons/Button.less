@@ -21,7 +21,7 @@
   }
 
   &:hover {
-    filter: saturate(150%) brightness(120%) grayscale(23%);
+    filter: saturate(110%) brightness(95%) grayscale(33%);
   }
 
   &:active {
@@ -35,5 +35,18 @@
     pointer-events: none;
     background: var(--L2);
     color: var(--L1);
+  }
+}
+
+
+.button.secondary {
+
+  background: var(--L3);
+  color: var(--P2);
+
+  &:active {
+    background: var(--L1);
+    filter: none;
+    transition: unset;
   }
 }

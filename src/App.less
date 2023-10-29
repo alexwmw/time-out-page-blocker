@@ -73,6 +73,14 @@ body {
     gap: 12px;
     z-index: 0;
 
+    &.no-block {
+      margin-top: 50px;
+
+      > p {
+        text-align: center;
+      }
+    }
+
     .button {
       span {
         width: 280px;
@@ -97,6 +105,10 @@ body {
           color: @Danger;
         }
       }
+    }
+
+    > p {
+      text-align: center;
     }
   }
 

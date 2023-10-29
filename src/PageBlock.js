@@ -14,6 +14,7 @@ import {
 import Header from "./components/Headers/Header";
 import { Favicon } from "./components/ProvidersSorter/SortableItem";
 import { set } from "./modules/Utilities";
+import IconTrigger from "./components/Icons/IconTrigger";
 
 const PageBlock = () => {
   const [held, setHeld] = useState(false);
@@ -70,7 +71,7 @@ const PageBlock = () => {
 
   const rateMe = options.isRated !== undefined && !options.isRated?.value && (
     <div className={"rate-me"}>
-      <h1>Got feedback?</h1>
+      <h1>Finding this extension useful?</h1>
       <p>
         Rate us on the{" "}
         <a onClick={setRated} target="_blank" href={webStoreUrl}>
@@ -83,7 +84,15 @@ const PageBlock = () => {
 
   return (
     <>
-      <Header></Header> {rateMe}
+      <Header>
+        <IconTrigger
+          className={"options-icon"}
+          title={"Go to extension page"}
+          type={"link"}
+          onClick={() => chrome.runtime.openOptionsPage()}
+        />
+      </Header>
+      {rateMe}
       <div className={"content"}>
         <h1>{provider.hostname}</h1>
         {notHostname && <p className={"url"}>{redirectAddress}</p>}

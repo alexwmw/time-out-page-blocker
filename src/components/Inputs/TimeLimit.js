@@ -24,7 +24,10 @@ const TimeLimit = ({ settingId }) => {
   const [endTime, setEndTime] = useState(object.end.value ?? "00:00");
   const allDay = object.allDay;
   const formRef = useRef();
-  // const isMounted = useRef(false);
+  const disabledByToggle = allDay.value === true;
+  const disabledByLogic =
+    startTime === options[settingId].value.start.value &&
+    endTime === options[settingId].value.end.value;
 
   const switchHandler = (e) => {
     setObject((oldObj) => {
@@ -53,11 +56,6 @@ const TimeLimit = ({ settingId }) => {
       value: object,
     });
   }, [object]);
-
-  const disabledByToggle = allDay.value === true;
-  const disabledByLogic =
-    startTime === options[settingId].value.start.value &&
-    endTime === options[settingId].value.end.value;
 
   const switchItem = (
     <div key={allDay.label} className={clsx("row", "time-row")}>
