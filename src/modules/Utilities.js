@@ -22,8 +22,8 @@ export const sanitize = (str) => {
 export const getBlockPredicates = (options) => {
   const isScheduled = options.scheduleBlocking.value;
   const date = new Date();
-
-  const day = (date.getDay() - 1) % 7;
+  const rawDay = date.getDay() - 1;
+  const day = rawDay % 7 < 0 ? rawDay + 7 : rawDay;
   const blockingDays = options.activeDays.value.map((day) => day.value);
   const isBlockingDay = blockingDays[day];
 

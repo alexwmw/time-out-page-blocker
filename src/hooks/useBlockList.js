@@ -66,7 +66,6 @@ const useBlockList = (currentTab) => {
   function onBlockListChange({ newValue }) {
     setIsBlockedSite(
       newValue?.some((item) => {
-        console.log({ ...item, url });
         return (
           (item.isByPath && url?.startsWith(item.hostname)) ||
           item.hostname === sanitize(url)

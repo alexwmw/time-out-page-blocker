@@ -33,15 +33,15 @@ const convertLegacyData = async function (callback) {
     sync.options.activeTimes.value = {
       allDay: {
         ...sync.options.activeTimes.value.allDay,
-        value: allDayCheckbox ?? false,
+        value: allDayCheckbox ?? true,
       },
       end: {
         ...sync.options.activeTimes.value.end,
-        value: endTime ?? false,
+        ...(endTime ? { value: endTime } : {}),
       },
       start: {
         ...sync.options.activeTimes.value.start,
-        value: startTime ?? false,
+        ...(startTime ? { value: startTime } : {}),
       },
     };
     sync.options.allowRevisits.value = revisitsCheckbox ?? false;
@@ -49,14 +49,17 @@ const convertLegacyData = async function (callback) {
     sync.options.revisitLimit.value = revisitsNumber ?? false;
     sync.options.scheduleBlocking.value = true;
 
-    const providers = matches.split("\n").map((item) => {
-      return {
-        hostname: item,
-        id: uniqueId(),
-        isByPath: true,
-        dateAdded: new Date(Date.now()).toLocaleString(),
-      };
-    });
+    const providers = matches
+      .split("\n")
+      .filter((item) => !item.includes("://"))
+      .map((item) => {
+        return {
+          hostname: item,
+          id: uniqueId(),
+          isByPath: true,
+          dateAdded: new Date(Date.now()).toLocaleString(),
+        };
+      });
 
     set({
       options: { ...sync.options },

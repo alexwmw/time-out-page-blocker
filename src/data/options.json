@@ -44,23 +44,23 @@
     "value": [
       {
         "label": "Monday",
-        "value": false
+        "value": true
       },
       {
         "label": "Tuesday",
-        "value": false
+        "value": true
       },
       {
         "label": "Wednesday",
-        "value": false
+        "value": true
       },
       {
         "label": "Thursday",
-        "value": false
+        "value": true
       },
       {
         "label": "Friday",
-        "value": false
+        "value": true
       },
       {
         "label": "Saturday",
