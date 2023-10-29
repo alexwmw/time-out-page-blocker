@@ -112,7 +112,7 @@
     "description": "Time frame during which visits to blocked sites will be allowed after unblocking",
     "value": 3,
     "min": 1,
-    "max": 999,
+    "max": 100,
     "type": "number",
     "unit": "min",
     "pos": 5,
