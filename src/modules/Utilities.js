@@ -19,23 +19,43 @@ export const sanitize = (str) => {
   return str;
 };
 
-export const getBlockPredicates = (options) => {
+export const getBlockPredicates = (options, mockDate = null) => {
   const isScheduled = options.scheduleBlocking.value;
-  const date = new Date();
-  const rawDay = date.getDay() - 1;
-  const day = rawDay % 7 < 0 ? rawDay + 7 : rawDay;
+  const date = mockDate ?? new Date();
+  let day = date.getDay();
+  day = day === 0 ? 6 : day - 1; // Monday should be the 0 index instead of Sunday
+
   const blockingDays = options.activeDays.value.map((day) => day.value);
   const isBlockingDay = blockingDays[day];
 
-  const [hour, minute] = date.toLocaleTimeString().split(":");
+  const hour = date.getHours();
+  const minute = date.getMinutes();
   const { allDay, start, end } = options.activeTimes.value;
-  const [startHour, startMinute] = start.value.split(":");
-  const [endHour, endMinute] = end.value.split(":");
-  const isBlockingTime =
-    allDay.value ||
-    (startHour < hour && hour < endHour) ||
-    (startHour === hour && startMinute < minute) ||
-    (hour === endHour && minute < endMinute);
+
+  // Convert start and end times into minutes for easier comparison
+  const [startHour, startMinute] = start.value.split(":").map(Number);
+  const [endHour, endMinute] = end.value.split(":").map(Number);
+
+  const startTotalMinutes = startHour * 60 + startMinute;
+  const endTotalMinutes = endHour * 60 + endMinute;
+  const currentTotalMinutes = hour * 60 + minute;
+
+  let isBlockingTime;
+
+  // If the time range spans midnight, split the check into two parts
+  if (startTotalMinutes < endTotalMinutes) {
+    // Normal range (start < end)
+    isBlockingTime =
+      allDay.value ||
+      (currentTotalMinutes >= startTotalMinutes &&
+        currentTotalMinutes < endTotalMinutes);
+  } else {
+    // Time range spans midnight
+    isBlockingTime =
+      allDay.value ||
+      currentTotalMinutes >= startTotalMinutes ||
+      currentTotalMinutes < endTotalMinutes;
+  }
 
   return { isScheduled, isBlockingDay, isBlockingTime };
 };

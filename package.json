@@ -7,13 +7,16 @@
     "build": "webpack --mode production",
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Alex Wright",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.18.5",
-    "@babel/preset-react": "^7.17.12",
+    "@babel/plugin-transform-runtime": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-jest": "^29.7.0",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
@@ -21,6 +24,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "less-loader": "^10.2.0",
     "prettier": "^3.0.3",
     "style-loader": "^3.3.1",

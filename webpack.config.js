@@ -12,6 +12,7 @@ module.exports = {
     app: "./src/App.js",
     "page-block": "./src/PageBlock.js",
   },
+  devtool: "source-map",
   devServer: {
     contentBase: "./dist",
   },
