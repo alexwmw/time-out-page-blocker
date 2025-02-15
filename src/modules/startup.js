@@ -45,7 +45,7 @@ export const runtimeMessageListener = (
   if (action === "unblock") {
     get(["options"], ({ options }) => {
       const allowRevisits = options.allowRevisits.value;
-      const time = !allowRevisits ? 1000 : options.revisitLimit.value * 60000;
+      const time = !allowRevisits ? 3000 : options.revisitLimit.value * 60000;
       console.log(
         "unblock listener: Setting unblock timeout for provider",
         id,
