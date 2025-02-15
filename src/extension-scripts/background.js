@@ -27,7 +27,14 @@ const createContextMenus = () =>
     chrome.contextMenus.create(item);
   });
 
+const onUpdate = async (details) => {
+  if (details.reason === chrome.runtime.OnInstalledReason.UPDATE) {
+    chrome.tabs.create({ url: "update.html" });
+  }
+};
+
 chrome.runtime.onInstalled.addListener(createContextMenus);
+chrome.runtime.onInstalled.addListener(onUpdate);
 chrome.contextMenus.onClicked.addListener(contextMenuListener);
 chrome.runtime.onMessage.addListener(runtimeMessageListener);
 chrome.runtime.onStartup.addListener(runtimeStartupListener);

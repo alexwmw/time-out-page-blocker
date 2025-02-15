@@ -9,6 +9,7 @@ module.exports = {
     background: "./src/extension-scripts/background.js",
     content: "./src/extension-scripts/content.js",
     options: "./src/Options.js",
+    update: "./src/Update.js",
     app: "./src/App.js",
     "page-block": "./src/PageBlock.js",
   },
@@ -27,6 +28,12 @@ module.exports = {
       template: "./src/options.html",
       filename: "options.html",
       chunks: ["options"],
+    }),
+    new HtmlWebpackPlugin({
+      title: "Update",
+      template: "./src/update.html",
+      filename: "update.html",
+      chunks: ["update"],
     }),
     new HtmlWebpackPlugin({
       title: "Page block",

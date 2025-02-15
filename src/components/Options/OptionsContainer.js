@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import OptionRows from "./OptionsRows";
-import information from "../../content/information.js";
+import { information } from "../../content/information.js";
 import MarkdownMapper from "../Markdown/MarkdownMapper";
 import ProvidersSorter from "../ProvidersSorter/ProvidersSorter";
 import "./OptionsContainer.less";

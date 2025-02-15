@@ -30,6 +30,7 @@ import {
   faTimes,
   faTimesCircle,
   faTrashAlt,
+  faTruckFast,
   faUnlockKeyhole,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -70,6 +71,7 @@ const iconMap = (type) => {
       swap: { iconClass: faArrowDownUpAcrossLine, iconTitle: "Swap icon" },
       time: { iconClass: faClock, iconTitle: "Time icon" },
       unblocked: { iconClass: faUnlockKeyhole, iconTitle: "Unblocked icon" },
+      update: { iconClass: faTruckFast, iconTitle: "Update icon" },
       warning: { iconClass: faExclamationTriangle, iconTitle: "Warning icon" },
       world: { iconClass: faGlobeEurope, iconTitle: "World icon" },
     }[type] ?? {}

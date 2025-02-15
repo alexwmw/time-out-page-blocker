@@ -23,6 +23,26 @@ export const getBlockListAdders = (url) => {
       alert("Site is already on block list!");
     });
   };
+  const addPageOnlyToBlockList = (callback) => {
+    get(["providers"], ({ providers }) => {
+      const uniqueId = createUniqueId();
+      const obj = {
+        id: uniqueId,
+        hostname: sanitize(url),
+        isByPath: false,
+        dateAdded: new Date(Date.now()).toLocaleString(),
+      };
+      const matches = providers.filter(
+        (item) => item.hostname === obj.hostname,
+      );
+      if (matches.length === 0) {
+        set({ providers: [...providers, obj] });
+        callback();
+        return;
+      }
+      alert("Site is already on block list!");
+    });
+  };
   const addDomainToBlockList = (callback) => {
     get(["providers"], ({ providers }) => {
       const uniqueId = createUniqueId();
@@ -44,7 +64,7 @@ export const getBlockListAdders = (url) => {
     });
   };
 
-  return { addPageToBlockList, addDomainToBlockList };
+  return { addPageToBlockList, addDomainToBlockList, addPageOnlyToBlockList };
 };
 
 const useBlockList = (currentTab) => {

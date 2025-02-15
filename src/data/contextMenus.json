@@ -9,19 +9,25 @@
   },
   {
     "id": "addDomainToBlockList",
-    "title": "Add this domain to block list",
+    "title": "Block this entire website",
     "parentId": "pageBlock",
     "visible": true
   },
   {
     "id": "addPageToBlockList",
-    "title": "Add this page to block list",
+    "title": "Block this page and subpages",
+    "parentId": "pageBlock",
+    "visible": true
+  },
+  {
+    "id": "addPageOnlyToBlockList",
+    "title": "Block this page only",
     "parentId": "pageBlock",
     "visible": true
   },
   {
     "id": "manageBlockList",
-    "title": "Manage block list",
+    "title": "Manage blocked items",
     "parentId": "pageBlock",
     "visible": true
   }

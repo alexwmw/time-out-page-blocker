@@ -10,7 +10,7 @@ const modKey = (userAgentStr) => {
 
 import manifest from "../manifest.json";
 
-const information = [
+export const information = [
   `
   ### Version ${manifest.version}
   ### Description
@@ -47,7 +47,35 @@ const information = [
   
   If you have have turned on **scheduling**, sites will only be blocked during scheduled hours.
   
+  ### Reporting issues
+  
+  If you discover any bugs or issues, please report them on the official [support page](https://chromewebstore.google.com/detail/hoeinipdpcnbifnmdkfbgmpaccbjpinl/support).
+  
   `,
 ];
 
-export default information;
+export const update_v2_1_0 = [
+  `
+  # **Time Out : Page Blocker** has been updated!
+  ## Version ${manifest.version} - February 2025
+  Thank you for using **Time Out : Page Blocker**! This update brings important fixes and improvements.`,
+  `
+  ### Bugs fixed: 
+  - **Scheduling:** Fixed an issue where scheduled blocking times were not consistently applied.
+  - **Allow re-visits after unblocking**: Resolved a bug that prevented pages from loading after pressing the unblock button when this setting was disabled.
+  
+  `,
+  `
+  ### Improvements:
+  - **Context menu items**: Updated wording for better clarity. Added an option to block individual pages while still allowing subpages.
+  `,
+  `
+  ### Need assistance?
+  
+  If you encounter any issues, please report them on the [support page](https://chromewebstore.google.com/detail/hoeinipdpcnbifnmdkfbgmpaccbjpinl/support).
+  
+  ###  Enjoying the extension?   ⭐⭐⭐⭐⭐
+   
+  If you find **Time Out** useful, please consider [leaving a review](https://chromewebstore.google.com/detail/time-out-page-blocker/hoeinipdpcnbifnmdkfbgmpaccbjpinl/reviews) — your support is greatly appreciated!
+  `,
+];

@@ -76,9 +76,14 @@ export const runtimeMessageListener = (
 export const contextMenuListener = async (info, tab) => {
   const [protocol, url] = tab.url.split(`//`) ?? [];
   const refreshTab = () => chrome.tabs.reload(tab.id);
-  const { addPageToBlockList, addDomainToBlockList } = getBlockListAdders(url);
+  const { addPageToBlockList, addDomainToBlockList, addPageOnlyToBlockList } =
+    getBlockListAdders(url);
   if (info.menuItemId === "addPageToBlockList") {
     addPageToBlockList(refreshTab);
+    return true;
+  }
+  if (info.menuItemId === "addPageOnlyToBlockList") {
+    addPageOnlyToBlockList(refreshTab);
     return true;
   }
   if (info.menuItemId === "addDomainToBlockList") {
